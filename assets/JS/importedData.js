@@ -7,10 +7,9 @@ axios.get(url)
     .catch(function (error) {
         console.log(error);
     });
-    
-function getResponse(object)
-{
-    let activity = {
+
+function getResponse(object) {
+    let cardInfo = {
         activity: "",
         weeks: "",
         assignment: "",
@@ -23,24 +22,60 @@ function getResponse(object)
     let assignmentCol = -1
     let quantityCol = -1
     let notesCol = -1
-    for (let i = 0;i<master.length;i++)
-    {
-        for (let j = 0;j<master[0].values[0].length;j++)
-        {
-            if (j == 0)
-            {
-                // if (master[i].values[j].formattedValue.toLowerCase() == "activity")
-                // {
-                //     console.log('abc');
-                // }
-                console.log('asda');
+    for (let i = 0; i < master.length; i++) {
+        for (let j = 0; j < master[0].values.length; j++) {
+            let value = master[i].values[j].formattedValue
+            if (value == null)
+            { 
+                continue;
             }
-            // if (object.data.sheets[1].data[0].rowData[i].values[j].formattedValue == null)
-            // {
-            //     continue;
-            // }
-            // console.log(object.data.sheets[1].data[0].rowData[i].values[j].formattedValue);
+            if (i == 0)
+            {
+                if (value.toLowerCase().trim() == 'activity')
+                {
+                    activityCol = j;
+                }
+                if (value.toLowerCase().trim() == 'weeks')
+                {
+                    weekCol = j;
+                }
+                if (value.toLowerCase().trim() == 'assignment')
+                {
+                    assignmentCol = j;
+                }
+                if (value.toLowerCase().trim() == 'quantity')
+                {
+                    quantityCol = j;
+                }
+                if (value.toLowerCase().trim() == 'coach notes:')
+                {
+                    notesCol = j;
+                }
+                continue;
+            }
+            if (j == activityCol)
+            {
+                cardInfo.activity = value;
+            }
+            if (j == weekCol)
+            {
+                cardInfo.weeks = value;
+            }
+            if (j == assignmentCol)
+            {
+                cardInfo.assignment = value;
+            }
+            if (j == quantityCol)
+            {
+                cardInfo.quantity = value;
+            }
+            if (j == notesCol)
+            {
+                cardInfo.notes = value;
+            }
+            
         }
+        console.log(cardInfo);
         console.log('\n');
 
     }
