@@ -1,4 +1,7 @@
 var url = "https://sheets.googleapis.com/v4/spreadsheets/1rgaHm4qlXdKpJvU52u6LCGlUBekrUx_bhUoTWmJ8t8E/?key=AIzaSyC8CJzSaxpcbUmHFLGfUkcSqTBhckWhpp0&includeGridData=true";
+let masteractivityList = [];
+let namesList = [];
+
 axios.get(url)
     .then(function (response) {
         // console.log(response);
@@ -8,14 +11,9 @@ axios.get(url)
         console.log(error);
     });
 
+
 function getResponse(object) {
-    let cardInfo = {
-        activity: "",
-        weeks: "",
-        assignment: "",
-        quantity: "",
-        notes: ""
-    }
+
     let master = object.data.sheets[1].data[0].rowData
     let activityCol = -1
     let weekCol = -1
@@ -23,6 +21,13 @@ function getResponse(object) {
     let quantityCol = -1
     let notesCol = -1
     for (let i = 0; i < master.length; i++) {
+        let cardInfo = {
+            activity: "",
+            weeks: "",
+            assignment: "",
+            quantity: "",
+            notes: ""
+        }
         for (let j = 0; j < master[0].values.length; j++) {
             let value = master[i].values[j].formattedValue
             if (value == null)
@@ -75,9 +80,81 @@ function getResponse(object) {
             }
             
         }
-        console.log(cardInfo);
+        masteractivityList.push(cardInfo);
+        // console.log(cardInfo);
         console.log('\n');
 
     }
+return masteractivityList;
+}
+
+
+//pull data from user list
+var nameUrl = "https://sheets.googleapis.com/v4/spreadsheets/1XYp11OWdX5LIycJ07gNq6d6m13AF3ZNIhsW9xq1PKN8/?key=AIzaSyC8CJzSaxpcbUmHFLGfUkcSqTBhckWhpp0&includeGridData=true"
+axios.get(nameUrl)
+    .then(response => {
+        getNameDateStart(response);
+    })
+    .catch(error => {
+        console.log(error);
+    })
+var getNameDateStart = (nameObject) => {
+
+    let nameMaster = nameObject.data.sheets[0].data[0].rowData;
+
+    let namesCol = -1;
+    let startCol = -1;
+
+    for (let i = 0; i < nameMaster.length; i++) {
+        let nameCheck = {
+            userName: '',
+            startDate: '',
+        }
+    
+        for (let j = 0; j < nameMaster[0].values.length; j++) {
+            let value = nameMaster[i].values[j].formattedValue;
+            if (value == null) {
+                continue
+            }
+            if (i == 0) {
+                if (value.toLowerCase().trim() == 'names')
+                {
+                    namesCol = j;
+                }
+                if (value.toLowerCase().trim() == 'start')
+                {
+                    startCol = j;
+                }
+                continue;
+            }
+            if (j == namesCol)
+            {
+                nameCheck.userName = value;
+            }
+            if (j == startCol)
+            {
+                nameCheck.startDate = value;
+            }
+    }
+    namesList.push(nameCheck);
+}
+return namesList;
+}
+
+/*
+function that will take cardInfo: check start date to weeks
+*/
+var startCheck = () => {
+    var A = masteractivityList
+    var B = namesList
+    var today = dayjs().format('YYYY-MM-DD');
+
+    let userInput = document.querySelector('inputarea').value.trim();
+    //take the value of userInput. check B for name and set a variable to value
+    //today.diff(startdate variable, weeks) = current week;
+    //take the current week and run if on A checking weeks. for loop 
+
+    console.log(A);
+    console.log(B);
 
 }
