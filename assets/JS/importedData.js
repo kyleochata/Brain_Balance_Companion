@@ -82,7 +82,7 @@ function getResponse(object) {
         }
         masteractivityList.push(cardInfo);
         // console.log(cardInfo);
-        console.log('\n');
+        // console.log('\n');
 
     }
 return masteractivityList;
@@ -141,20 +141,21 @@ var getNameDateStart = (nameObject) => {
 return namesList;
 }
 
-/*
-function that will take cardInfo: check start date to weeks
-*/
-var startCheck = () => {
-    var A = masteractivityList
-    var B = namesList
-    var today = dayjs().format('YYYY-MM-DD');
+//When modal button gets clicked: need to add the JS from BUlma to get modal to pop up. fxn then will take all the username data from sheets and render them in as options for the select (dropdown menu) element in modal that will pop up.
+var renderUserNameOptions = () => {
 
-    let userInput = document.querySelector('inputarea').value.trim();
-    //take the value of userInput. check B for name and set a variable to value
-    //today.diff(startdate variable, weeks) = current week;
-    //take the current week and run if on A checking weeks. for loop 
+    let namesOnly = [];
 
-    console.log(A);
-    console.log(B);
-
+    for (let i=0; i < nameList.length; i++) {
+        namesOnly.push(namesList[i].userName);
+    };
+    let selectNameEl = document.querySelector('select');
+    for (let i=0; i < namesOnly.length; i++) {
+        let optionEl = document.createElement('option');
+        optionEl.setAttribute('value', namesOnly[i].userName);
+        optionEl.textContent = namesOnly[i].userName;
+        selectNameEl.appendChild(optionEl);
+    }
 }
+var subBtn = document.querySelector('#submit');
+//add event listener for the modal button to run the render name options for username select dropdown menu
