@@ -34,8 +34,8 @@
       <div class="column is-half"><img src="./assets/imgs/BBLogo.png" alt="Brain Balance Logo" id=headerLogo></div>
       <div class="column">
         <div class="columns" id="headerBottomRight">
-          <button class="column is-offset-half headerBottomRightItem" id="username">UserName</button>
-          <button class="column headerBottomRightItem" id=pickWeek>Pick Week</button>
+          <button class="column is-offset-half headerBottomRightItem js-modal-trigger" data-target="username-modal" id="username">UserName</button>
+          <button class="column headerBottomRightItem js-modal-trigger" data-target="week-modal" id=pickWeek>Pick Week</button>
         </div>
       </div>
 
@@ -124,16 +124,54 @@
       <h3>Made by Adrian C, Steve M, and Kyle E.</h3>
       <a>link to code</a>
     </div>
-
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
-    <script src="./assets/JS/importedData.js"></script>
-    <script src="./assets/JS/script.js"></script>
-
   </footer>
+
+  <!-- username modal -->
+  <div id="username-modal" class="modal">
+    <div class="modal-background"></div>
+  
+    <div class="modal-content">
+      <div class="box">
+        <div class="labelContainer">
+          <label>Please Select a UserName:</label>
+        </div>
+
+        <div class="select">
+          <select id="usernameSelect"></select>
+        </div>
+      </div>
+    </div>
+  
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+
+  <!-- week select modal -->
+  <div id="week-modal" class="modal">
+    <div class="modal-background"></div>
+  
+    <div class="modal-content">
+      <div class="box">
+        <div class="labelContainer">
+          <label>Please Select a UserName:</label>
+        </div>
+
+        <div class="select">
+          <select id="week"></select>
+        </div>
+      </div>
+    </div>
+  
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+  <script src="./assets/JS/importedData.js"></script>
+  <script src="./assets/JS/script.js"></script>
+
 </body>
 
 </html>
