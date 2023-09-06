@@ -1,0 +1,403 @@
+/* using Bulma CSS framework */
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+
+/* Fonts */
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../fonts/metropolis/Metropolis-Black.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../fonts/metropolis/Metropolis-BoldItalic.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis Extra';
+    src: url('./fonts/metropolis/Metropolis-ExtraBold.woff2') format('woff2'),
+        url('./fonts/metropolis/Metropolis-ExtraBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../fonts/metropolis/Metropolis-Bold.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../fonts/metropolis/Metropolis-BlackItalic.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-BlackItalic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../fonts/metropolis/Metropolis-Medium.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis Extra';
+    src: url('../fonts/metropolis/Metropolis-ExtraBoldItalic.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-ExtraBoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../fonts/metropolis/Metropolis-Light.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis Extra';
+    src: url('../fonts/metropolis/Metropolis-ExtraLightItalic.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-ExtraLightItalic.woff') format('woff');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis Extra';
+    src: url('../fonts/metropolis/Metropolis-ExtraLight.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-ExtraLight.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../fonts/metropolis/Metropolis-LightItalic.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-ExtraLightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../fonts/metropolis/Metropolis-MediumItalic.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-MediumItalic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../fonts/metropolis/Metropolis-RegularItalic.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-RegularItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis Semi';
+    src: url('../fonts/metropolis/Metropolis-SemiBold.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../fonts/metropolis/Metropolis-ThinItalic.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-ThinItalic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../fonts/metropolis/Metropolis-Regular.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url('../fonts/metropolis/Metropolis-Thin.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Metropolis Semi';
+    src: url('../fonts/metropolis/Metropolis-SemiBoldItalic.woff2') format('woff2'),
+        url('../fonts/metropolis/Metropolis-SemiBoldItalic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* end fonts */
+
+:root {
+
+    --main-green: rgb(180, 207, 77);
+    --main-blue: #003760;
+    --main-orange: #ffc300;
+    --main-teal: rgba(0, 187, 199, 1)
+}
+
+Body {
+    font-family: 'Metropolis Semi';
+    --nav-height: 50px;
+}
+
+header {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+button {
+    font-family: 'Metropolis Semi';
+    font-size: 1.3vw;
+    font-weight: bold;
+    background-color: var(--main-green);
+    border-radius: 5px;
+    border: 0px;
+    color: white;
+}
+
+button:hover {
+    color: black;
+    box-shadow: 300px 0 0 0 rgba(0, 0, 0, 0.25) inset, -300px 0 0 0 rgba(0, 0, 0, 0.25) inset;
+    cursor: pointer;
+    transition: all 1.5s, color 0.3s 0.3s;
+}
+
+#headerTop {
+    display: flex;
+    border-bottom: 1px rgba(0, 0, 0, 0.15) solid;
+    height: var(--nav-height);
+    width: 95%;
+    transition: transform 0.2s;
+    background-color: white;
+    margin: 0;
+    
+}
+
+.headerTop--hidden {
+    transform: translateY(calc(-1 * var(--nav-height)));
+    box-shadow: none;
+    padding: 0px;
+    margin: 0px;
+    display: none;
+}
+
+.headerTopItem {
+    display: flex;
+    justify-content: flex-end;
+    color: #003760;
+    padding: 0;
+    align-items: center;
+}
+
+#headerBottom {
+    width:95%;
+    height: var(--nav-height);
+    margin-bottom: 5px;
+    border-bottom: 1px rgba(0, 0, 0, .15) solid;
+    margin-top: 10px;
+    
+}
+
+.headerBottomAfter{
+    position:fixed;
+    display: flex;
+    align-items: center;
+    height: var(--nav-height);
+    width: 100%;
+    background-color: white;
+    border-bottom: 0px;
+    margin-bottom: 5px;
+    filter: drop-shadow(0px 5px 4px grey);
+    padding: 40px 35px;
+}
+
+#headerLogo {
+    min-width: 200px;
+    max-width: 300px;
+    width: 20%;
+    padding: 0px;
+}
+
+#headerBottomRight {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+.headerBottomRightItem {
+    min-width: 150px;
+}
+
+#activitiesList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--main-teal);
+    color: white;
+    width: 100%;
+    border-bottom-left-radius: 60% 2vw;
+    border-bottom-right-radius: 60% 2vw;
+    min-height: 500px; 
+    padding-bottom: 40px;
+}
+
+.activitiesHead {
+    background-color: white;
+    color: var(--main-blue);
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 115px;
+    margin-top: 30px;
+    border-radius: 10px;
+    flex: 0 0 auto;
+}
+
+.weekTitle1 {
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    line-height: 3rem;
+    padding-top: 10px;
+}
+
+.weekTitle2 {
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    line-height: 3rem;
+}
+
+.exerciseListMainContainer{
+    display: flex;
+    text-align: center;
+    background-color: white;
+    color: var(--main-blue);
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 115px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.exerciseListContainer{
+    background-color: var(--main-orange);
+    height:90%;
+    width:99%;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.exerciseCard{
+    /* style it up! */
+}
+
+.divider{
+    width:85%;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+#resourcesContainer{
+    display: flex;
+    text-align: center;
+    background-color: rgb(230, 229, 229);
+    color: var(--main-blue);
+    width: 90%;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.resourcesTitle{
+    background-color: white;
+    height: 40px;
+    margin-top:6px;
+    width: 99%;
+    border-radius: 5px 5px 0px 0px;
+    text-align: center;
+    font-size: 27px;
+    line-height: 40px;
+}
+
+#resourcesContents{
+    background-color: white;
+    margin-top:6px;
+    width:99%;
+    border-radius: 0px 0px 5px 5px;
+    margin-bottom:5px;
+}
+
+footer {
+    display: flex;
+    width:95%;
+    margin: 0 auto;
+    height: var(--nav-height);
+    padding-top: 10px;
+    margin-bottom: 5px;
+    border-top: 1px rgba(0, 0, 0, .15) solid;
+    margin-top: 20px;
+
+}
+
+.footerContents{
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px 10px 10px;
+    width:100%;
+}

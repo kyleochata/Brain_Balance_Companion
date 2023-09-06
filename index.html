@@ -1,47 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CDN for Bulma framework -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <!-- end CDN for Bulma framework -->
+
   <title>Brain Balance Checklist</title>
+
 </head>
+
 <body>
   <header>
-  <div class="header-left">
-    <h1>Brain Balance</h1>
-  </div>
-  <form>
-    <label>Enter Username:</label>
-    <input type="text" id="userInput">
-    <button id="submit">Submit</button>
-  </form>
+    <section id="headerTop" class="columns">
+      <div class="column is-offset-half  headerTopItem"><img src="./assets/imgs/phone-removebg-preview.png" alt="phone"
+          style="width: 50px; height: 50px; margin-right: 7px">800.555.5500</div>
+      <div class="column headerTopItem"><img src="./assets/imgs/location-removebg-preview.png" alt="Find a Location"
+          style="height: 25px; margin-right: 7px">FIND A CENTER</div>
+      <div class="column headerTopItem">
+        <img src="./assets/imgs/ownFranchise-removebg-preview.png" alt="own a center"
+          style="width: 35px; margin-right: 7px">
+        <p>OWN A CENTER</p>
+      </div>
+
+
+    </section>
+
+    <section id="headerBottom" class="columns">
+      <div class="column is-half"><img src="./assets/imgs/BBLogo.png" alt="Brain Balance Logo" id=headerLogo></div>
+      <div class="column">
+        <div class="columns" id="headerBottomRight">
+          <button class="column is-offset-half headerBottomRightItem" id="username">UserName</button>
+          <button class="column headerBottomRightItem" id=pickWeek>Pick Week</button>
+        </div>
+      </div>
+
+    </section>
   </header>
 
   <main>
     <section id="activitiesList">
-      <h2 class="weekTitle">Week 1</h2>
-      <!-- possible Ul to Li dynamic generate -->
-      <div class="exerciseListContainer">
-        <div class="exerciseCard"></div>
+      <div class="activitiesHead">
+        <h2 class="weekTitle1">Exercises for</h2>
+        <h2 class="weekTitle2">Week 1</h2>
       </div>
+      <!-- possible Ul to Li dynamic generate -->
+      <div class="exerciseListMainContainer">
+
+        <div class="exerciseListContainer columns">What is Lorem Ipsum?
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+          typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+          sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum.What is Lorem Ipsum?
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+          typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+          sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum.
+          <div class="exerciseCard">
+
+
+          </div>
+          <!-- all dynamically generated cards should have a class of column -->
+          <div class="activityCard">
+
+          </div>
+
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <section id="resourcesContainer">
+        <h2 class="resourcesTitle">Resources</h2>
+        <div id="resourcesContents">
+          What is Lorem Ipsum?
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book. It has survived not only five cand more recently with desktop publishing software
+          like Aldus PageMaker including versions of Lorem Ipsum.What is Lorem Ipsum?
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+          typesetting, remaining essentially unchaand more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum.What is Lorem Ipsum?
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+          typesetting, remaining essentially unchaenturies, but also the leap into electronic typesetting, remaining
+          essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem
+          Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
+          Lorem Ipsum.What is Lorem Ipsum?
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+          typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+          sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum.What is Lorem Ipsum?
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+          typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+          sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum.
+        </div>
+        <!-- video api or iframe youtube ch for brain balance. -->
+      </section>
+
     </section>
 
-    <section id="resourcesContainer">
-      <h2 class="resourcesTitle"></h2>
-      <!-- video api or iframe youtube ch for brain balance. -->
-    </section>
+
   </main>
 
   <footer>
-    <h3>Made by Adrian C, Steve M, and Kyle E.</h3>
-    <a>link to code</a>
+    <div class="footerContents">
+      <h3>Made by Adrian C, Steve M, and Kyle E.</h3>
+      <a>link to code</a>
+    </div>
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script
-    src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
-    crossorigin="anonymous"
-  ></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
     <script src="./assets/JS/importedData.js"></script>
+    <script src="./assets/JS/script.js"></script>
+
   </footer>
 </body>
+
 </html>
