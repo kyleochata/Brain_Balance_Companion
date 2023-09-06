@@ -34,8 +34,9 @@
       <div class="column is-half"><img src="./assets/imgs/BBLogo.png" alt="Brain Balance Logo" id=headerLogo></div>
       <div class="column">
         <div class="columns" id="headerBottomRight">
-          <button class="column is-offset-half headerBottomRightItem" id="username">UserName</button>
-          <button class="column headerBottomRightItem" id=pickWeek>Pick Week</button>
+          <div id="titleUserInfo" class="headerBottomRightItem">User: xxx Week: yyy</div>
+          <button class="column is-offset-half headerBottomRightItem js-modal-trigger" data-target="username-modal" id="username">UserName</button>
+          <button class="column headerBottomRightItem js-modal-trigger" data-target="week-modal" id=pickWeek>Pick Week</button>
         </div>
       </div>
 
@@ -51,28 +52,28 @@
       <!-- possible Ul to Li dynamic generate -->
       <div class="exerciseListMainContainer">
 
-        <div class="exerciseListContainer columns">What is Lorem Ipsum?
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-          typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-          sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-          PageMaker including versions of Lorem Ipsum.What is Lorem Ipsum?
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-          make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-          typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-          sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-          PageMaker including versions of Lorem Ipsum.
-          <div class="exerciseCard">
+        <div class="exerciseListContainer">
+          <div class="activityPadding columns">
 
+            <!-- all dynamically generated cards should have a class of column -->
+            <div class="card activityCard column is-one-fifths">
+              <div class="card-header activityCardHeader columns">
+                  Superman
+              </div>
+              <div class="card-content activityContent">
+                This is the description of the activity which will exist here for all to see, and complete with reckless abandon. This is the description of the activity which will exist here for all to see, and complete with reckless abandon. This is the description of the activity which will exist here for all to see, and complete with reckless abandon. This is the description of the activity which will exist here for all to see, and complete with reckless abandon. This is the description of the activity which will exist here for all to see, and complete with reckless abandon. 
+              </div>
+              <div class="card-footer">
+                <div class="card-footer-item cardFooterReps">
+                  25
+                </div>
+                <button class="card-footer-item cardFooterButton">
+                  Done!
+                </button>
 
+              </div>
+            </div>
           </div>
-          <!-- all dynamically generated cards should have a class of column -->
-          <div class="activityCard">
-
-          </div>
-
         </div>
       </div>
 
@@ -124,16 +125,54 @@
       <h3>Made by Adrian C, Steve M, and Kyle E.</h3>
       <a>link to code</a>
     </div>
-
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
-    <script src="./assets/JS/importedData.js"></script>
-    <script src="./assets/JS/script.js"></script>
-
   </footer>
+
+  <!-- username modal -->
+  <div id="username-modal" class="modal">
+    <div class="modal-background"></div>
+  
+    <div class="modal-content">
+      <div class="box">
+        <div class="labelContainer">
+          <label>Please Select a UserName:</label>
+        </div>
+
+        <div class="select">
+          <select id="usernameSelect"></select>
+        </div>
+        <button id="closeSelectButton">OK</button>
+      </div>
+    </div>
+  
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+
+  <!-- week select modal -->
+  <div id="week-modal" class="modal">
+    <div class="modal-background"></div>
+  
+    <div class="modal-content">
+      <div class="box">
+        <div class="labelContainer">
+          <label>Please Select a Week:</label>
+        </div>
+
+        <div class="select">
+          <select id="week"></select>
+        </div>
+      </div>
+    </div>
+  
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+  <script src="./assets/JS/script.js"></script>
+
 </body>
 
 </html>

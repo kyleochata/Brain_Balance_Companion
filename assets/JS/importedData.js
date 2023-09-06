@@ -1,11 +1,16 @@
 var url = "https://sheets.googleapis.com/v4/spreadsheets/1rgaHm4qlXdKpJvU52u6LCGlUBekrUx_bhUoTWmJ8t8E/?key=AIzaSyC8CJzSaxpcbUmHFLGfUkcSqTBhckWhpp0&includeGridData=true";
 const masteractivityList = [];
 const namesList = [];
-
+var state = 0;
 axios.get(url)
     .then(function (response) {
         // console.log(response);
-        getResponse(response);
+        if (masteractivityList == [])
+        {
+            getResponse(response);
+            console.log('masterlistdone');
+            console.log(masteractivityList);
+        }
     })
     .catch(function (error) {
         console.log(error);
@@ -31,61 +36,48 @@ function getResponse(object) {
         }
         for (let j = 0; j < master[0].values.length; j++) {
             let value = master[i].values[j].formattedValue
-            if (value == null)
-            { 
+            if (value == null) {
                 continue;
             }
-            if (i == 0)
-            {
-                if (value.toLowerCase().trim() == 'activity')
-                {
+            if (i == 0) {
+                if (value.toLowerCase().trim() == 'activity') {
                     activityCol = j;
                 }
-                if (value.toLowerCase().trim() == 'weeks')
-                {
+                if (value.toLowerCase().trim() == 'weeks') {
                     weekCol = j;
                 }
-                if (value.toLowerCase().trim() == 'assignment')
-                {
+                if (value.toLowerCase().trim() == 'assignment') {
                     assignmentCol = j;
                 }
-                if (value.toLowerCase().trim() == 'quantity')
-                {
+                if (value.toLowerCase().trim() == 'quantity') {
                     quantityCol = j;
                 }
-                if (value.toLowerCase().trim() == 'coach notes:')
-                {
+                if (value.toLowerCase().trim() == 'coach notes:') {
                     notesCol = j;
                 }
                 continue;
             }
-            if (j == activityCol)
-            {
+            if (j == activityCol) {
                 cardInfo.activity = value;
             }
-            if (j == weekCol)
-            {
+            if (j == weekCol) {
                 cardInfo.weeks = value;
             }
-            if (j == assignmentCol)
-            {
+            if (j == assignmentCol) {
                 cardInfo.assignment = value;
             }
-            if (j == quantityCol)
-            {
+            if (j == quantityCol) {
                 cardInfo.quantity = value;
             }
-            if (j == notesCol)
-            {
+            if (j == notesCol) {
                 cardInfo.notes = value;
             }
-            
+
         }
         masteractivityList.push(cardInfo);
     }
+
 }
-
-
 
 //pull data from user list
 var nameUrl = "https://sheets.googleapis.com/v4/spreadsheets/1XYp11OWdX5LIycJ07gNq6d6m13AF3ZNIhsW9xq1PKN8/?key=AIzaSyC8CJzSaxpcbUmHFLGfUkcSqTBhckWhpp0&includeGridData=true"
@@ -108,29 +100,25 @@ var getNameDateStart = (nameObject) => {
             userName: '',
             startDate: '',
         }
-    
+
         for (let j = 0; j < nameMaster[0].values.length; j++) {
             let value = nameMaster[i].values[j].formattedValue;
             if (value == null) {
                 continue
             }
             if (i == 0) {
-                if (value.toLowerCase().trim() == 'names')
-                {
+                if (value.toLowerCase().trim() == 'names') {
                     namesCol = j;
                 }
-                if (value.toLowerCase().trim() == 'start')
-                {
+                if (value.toLowerCase().trim() == 'start') {
                     startCol = j;
                 }
                 continue;
             }
-            if (j == namesCol)
-            {
+            if (j == namesCol) {
                 nameCheck.userName = value;
             }
-            if (j == startCol)
-            {
+            if (j == startCol) {
                 nameCheck.startDate = value;
             }
         }
