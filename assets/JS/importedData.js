@@ -12,6 +12,7 @@ axios.get(url)
     });
 
 
+
 function getResponse(object) {
 
     let master = object.data.sheets[1].data[0].rowData
@@ -83,6 +84,7 @@ function getResponse(object) {
         masteractivityList.push(cardInfo);
     }
 }
+
 
 
 //pull data from user list
