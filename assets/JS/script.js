@@ -167,15 +167,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Add a click event on buttons to open a specific modal
+   // Add a click event on buttons to open a specific modal
     (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
         const modal = $trigger.dataset.target;
+        console.log(modal);
         const $target = document.getElementById(modal);
-
+console.log($target);
         $trigger.addEventListener('click', () => {
             openModal($target);
         });
     });
+
+
 
     // Add a click event on various child elements to close the parent modal
     (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
@@ -241,6 +244,31 @@ const observer = new MutationObserver(mutationsList => {
 const config = { attributes: true, attributeFilter: ['class'] };
 observer.observe(usernameModal, config);
 
+var renderFirstCard = (firstObject) => {
+    let cardDiv = document.createElement('div');
+    cardDiv. setAttribute('class', 'card activityCard column is-one-fifths');
+    activityPDiv.appendChild(cardDiv);
+    let cardHeader = document.createElement('div');
+    cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
+    cardHeader.textContent = firstObject.activity;
+    let madeCardDiv = document.querySelector('.activityCard');
+    madeCardDiv.appendChild(cardHeader);
+    let cardBody = document.createElement('div');
+    cardBody.setAttribute('class', 'card-content activityContent');
+    cardBody.textContent = firstObject.quantity;
+    madeCardDiv.appendChild(cardBody);
+    let cardFootDiv = document.createElement('div');
+    cardFootDiv.setAttribute('class', 'card-footer');
+    madeCardDiv.appendChild(cardFootDiv);
+    let cardFootReps = document.createElement('div');
+    cardFootReps.setAttribute('class', 'card-footer-item cardFooterReps');
+    cardFootReps.textContent = firstObject.assignment;
+    madeCardDiv.appendChild(cardFootReps);
+    let cardFootBtn = document.createElement('button');
+    cardFootBtn.setAttribute('class', 'card-footer-item cardFooterButton');
+    cardFootBtn.textContent = 'Done!';
+    madeCardDiv.appendChild(cardFootBtn);
+}
 // Function to change the class of the watched element
 function update_usernames() {
     const name = document.getElementById('usernameSelect').value;
