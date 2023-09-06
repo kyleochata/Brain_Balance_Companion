@@ -1,15 +1,21 @@
 var url = "https://sheets.googleapis.com/v4/spreadsheets/1rgaHm4qlXdKpJvU52u6LCGlUBekrUx_bhUoTWmJ8t8E/?key=AIzaSyC8CJzSaxpcbUmHFLGfUkcSqTBhckWhpp0&includeGridData=true";
 const masteractivityList = [];
 const namesList = [];
-
+var state = 0;
 axios.get(url)
     .then(function (response) {
         // console.log(response);
-        getResponse(response);
+        if (masteractivityList == [])
+        {
+            getResponse(response);
+            console.log('masterlistdone');
+            console.log(masteractivityList);
+        }
     })
     .catch(function (error) {
         console.log(error);
     });
+
 
 
 function getResponse(object) {
@@ -70,14 +76,14 @@ function getResponse(object) {
         }
         masteractivityList.push(cardInfo);
     }
-}
 
+}
 
 //pull data from user list
 var nameUrl = "https://sheets.googleapis.com/v4/spreadsheets/1XYp11OWdX5LIycJ07gNq6d6m13AF3ZNIhsW9xq1PKN8/?key=AIzaSyC8CJzSaxpcbUmHFLGfUkcSqTBhckWhpp0&includeGridData=true"
 axios.get(nameUrl)
     .then(response => {
-        renderUserNameOptions(response);
+        getNameDateStart(response);
     })
     .catch(error => {
         console.log(error);

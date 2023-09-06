@@ -1,23 +1,153 @@
+var url = "https://sheets.googleapis.com/v4/spreadsheets/1rgaHm4qlXdKpJvU52u6LCGlUBekrUx_bhUoTWmJ8t8E/?key=AIzaSyC8CJzSaxpcbUmHFLGfUkcSqTBhckWhpp0&includeGridData=true";
+const masteractivityList = [];
+const namesList = [];
+var state = 0;
+axios.get(url)
+    .then(function (response) {
+        // console.log(response);
+        if (masteractivityList == []) {
+            getResponse(response);
+        }
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+
+
+
+function getResponse(object) {
+
+    let master = object.data.sheets[1].data[0].rowData
+    let activityCol = -1
+    let weekCol = -1
+    let assignmentCol = -1
+    let quantityCol = -1
+    let notesCol = -1
+    for (let i = 0; i < master.length; i++) {
+        let cardInfo = {
+            activity: "",
+            weeks: "",
+            assignment: "",
+            quantity: "",
+            notes: ""
+        }
+        for (let j = 0; j < master[0].values.length; j++) {
+            let value = master[i].values[j].formattedValue
+            if (value == null) {
+                continue;
+            }
+            if (i == 0) {
+                if (value.toLowerCase().trim() == 'activity') {
+                    activityCol = j;
+                }
+                if (value.toLowerCase().trim() == 'weeks') {
+                    weekCol = j;
+                }
+                if (value.toLowerCase().trim() == 'assignment') {
+                    assignmentCol = j;
+                }
+                if (value.toLowerCase().trim() == 'quantity') {
+                    quantityCol = j;
+                }
+                if (value.toLowerCase().trim() == 'coach notes:') {
+                    notesCol = j;
+                }
+                continue;
+            }
+            if (j == activityCol) {
+                cardInfo.activity = value;
+            }
+            if (j == weekCol) {
+                cardInfo.weeks = value;
+            }
+            if (j == assignmentCol) {
+                cardInfo.assignment = value;
+            }
+            if (j == quantityCol) {
+                cardInfo.quantity = value;
+            }
+            if (j == notesCol) {
+                cardInfo.notes = value;
+            }
+
+        }
+        masteractivityList.push(cardInfo);
+    }
+
+}
+
+console.log(namesList === null);
+
+
+//pull data from user list
+var nameUrl = "https://sheets.googleapis.com/v4/spreadsheets/1XYp11OWdX5LIycJ07gNq6d6m13AF3ZNIhsW9xq1PKN8/?key=AIzaSyC8CJzSaxpcbUmHFLGfUkcSqTBhckWhpp0&includeGridData=true"
+axios.get(nameUrl)
+    .then(response => {
+        getNameDateStart(response);
+        renderUserNameOptions(namesList);
+    })
+    .catch(error => {
+        console.log(error);
+    })
+var getNameDateStart = (nameObject) => {
+
+    let nameMaster = nameObject.data.sheets[0].data[0].rowData;
+
+    let namesCol = -1;
+    let startCol = -1;
+
+    for (let i = 0; i < nameMaster.length; i++) {
+        let nameCheck = {
+            userName: '',
+            startDate: '',
+        }
+
+        for (let j = 0; j < nameMaster[0].values.length; j++) {
+            let value = nameMaster[i].values[j].formattedValue;
+            if (value == null) {
+                continue
+            }
+            if (i == 0) {
+                if (value.toLowerCase().trim() == 'names') {
+                    namesCol = j;
+                }
+                if (value.toLowerCase().trim() == 'start') {
+                    startCol = j;
+                }
+                continue;
+            }
+            if (j == namesCol) {
+                nameCheck.userName = value;
+            }
+            if (j == startCol) {
+                nameCheck.startDate = value;
+            }
+        }
+        namesList.push(nameCheck);
+    }
+    namesList.shift()
+}
+
 
 // enable hidden nav bar
 document.addEventListener("DOMContentLoaded", function () {
     const nav = $("#headerTop")
     const bottomNav = $("#headerBottom")
-let lastScrollY = window.scrollY;
+    let lastScrollY = window.scrollY;
 
-window.addEventListener("scroll", () => {
-    if (lastScrollY < window.scrollY) {
-        console.log(lastScrollY)
-        nav.addClass("headerTop--hidden");
-        bottomNav.addClass("headerBottomAfter")
-        bottomNav.removeAttr("id")
-        
-    } else {
-        nav.removeClass("headerTop--hidden");
-        bottomNav.removeClass("headerBottomAfter");
-        bottomNav.attr("id", "headerBottom")
-    }
-});
+    window.addEventListener("scroll", () => {
+        if (lastScrollY < window.scrollY) {
+            console.log(lastScrollY)
+            nav.addClass("headerTop--hidden");
+            bottomNav.addClass("headerBottomAfter")
+            bottomNav.removeAttr("id")
+
+        } else {
+            nav.removeClass("headerTop--hidden");
+            bottomNav.removeClass("headerBottomAfter");
+            bottomNav.attr("id", "headerBottom")
+        }
+    });
 });
 
 //modal JS to pop
@@ -68,10 +198,9 @@ document.addEventListener('DOMContentLoaded', () => {
 //When modal button gets clicked: need to add the JS from BUlma to get modal to pop up. fxn then will take all the username data from sheets and render them in as options for the select (dropdown menu) element in modal that will pop up.
 var renderUserNameOptions = (namesList) => {
 
-    let listArr = namesList;
-    let  namesOnly= [];
-    for (let i = 0; i < listArr.length; i++) {
-        namesOnly.push(listArr[i].userName);
+    let namesOnly = [];
+    for (let i = 0; i < namesList.length; i++) {
+        namesOnly.push(namesList[i].userName);
     };
     let selectNameEl = document.querySelector('#usernameSelect');
     for (let i = 0; i < namesOnly.length; i++) {
@@ -82,5 +211,49 @@ var renderUserNameOptions = (namesList) => {
     }
 }
 
+// helper function to close modal
+function closeModal($el) {
+    $el.classList.remove('is-active');
+}
 
-//add event listener for the modal button to run the render name options for username select dropdown menu
+// event listener for button that closes the modal for username Selection
+document.getElementById('closeSelectButton').addEventListener('click', function (event) {
+    const closestModal = event.target.closest('.modal');
+    if (closestModal) {
+        closeModal(closestModal);
+    }
+});
+
+const usernameModal = document.getElementById('username-modal');
+
+// Create a Mutation Observer
+const observer = new MutationObserver(mutationsList => {
+    for (const mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class' && !mutation.target.classList.contains('is-active')) {
+            // Class attribute has been changed
+            const targetElement = mutation.target;
+            update_usernames();
+        }
+    }
+});
+
+// Configure the observer to watch for changes to the "class" attribute
+const config = { attributes: true, attributeFilter: ['class'] };
+observer.observe(usernameModal, config);
+
+// Function to change the class of the watched element
+function update_usernames() {
+    const name = document.getElementById('usernameSelect').value;
+    const index = namesList.findIndex(user => user.userName.includes(name));
+    let now = dayjs();
+    let userDate;
+    if (index !== -1) {
+        console.log(namesList[index]);
+        userDate = dayjs(namesList[index].startDate);
+    } else {
+        alert("no user found");
+    }
+    const weeksDifference = now.diff(userDate, 'week');
+    document.getElementById('titleUserInfo').textContent = "User: " + name + " Weeks: " + weeksDifference
+    console.log(weeksDifference);
+}
