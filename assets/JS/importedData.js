@@ -1,6 +1,6 @@
 var url = "https://sheets.googleapis.com/v4/spreadsheets/1rgaHm4qlXdKpJvU52u6LCGlUBekrUx_bhUoTWmJ8t8E/?key=AIzaSyC8CJzSaxpcbUmHFLGfUkcSqTBhckWhpp0&includeGridData=true";
-let masteractivityList = [];
-let namesList = [];
+const masteractivityList = [];
+const namesList = [];
 
 axios.get(url)
     .then(function (response) {
@@ -69,11 +69,11 @@ function getResponse(object) {
 
         }
         masteractivityList.push(cardInfo);
-        // console.log(cardInfo);
-        // console.log('\n');
-
     }
+<<<<<<< HEAD
     return masteractivityList;
+=======
+>>>>>>> 2c10cccffa0f1f73af28eee30146f53b53c538ce
 }
 
 
@@ -120,6 +120,7 @@ var getNameDateStart = (nameObject) => {
                 nameCheck.startDate = value;
             }
         }
+<<<<<<< HEAD
         namesList.push(nameCheck);
     }
 
@@ -189,3 +190,9 @@ var renderUserNameOptions = (response) => {
 }
 //add event listener for the modal button to run the render name options for username select dropdown menu
 const usernameBtn = document.querySelector("#username");
+=======
+    namesList.push(nameCheck);
+    }
+}
+
+>>>>>>> 2c10cccffa0f1f73af28eee30146f53b53c538ce

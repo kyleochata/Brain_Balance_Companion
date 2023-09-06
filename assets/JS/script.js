@@ -81,3 +81,6 @@ var renderUserNameOptions = (namesList) => {
         selectNameEl.appendChild(optionEl);
     }
 }
+
+
+//add event listener for the modal button to run the render name options for username select dropdown menu
