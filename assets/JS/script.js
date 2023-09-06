@@ -23,7 +23,7 @@ window.addEventListener("scroll", () => {
 
 
 //When modal button gets clicked: need to add the JS from BUlma to get modal to pop up. fxn then will take all the username data from sheets and render them in as options for the select (dropdown menu) element in modal that will pop up.
-var renderUserNameOptions = () => {
+var renderUserNameOptions = (nameList) => {
 
     let namesOnly = [];
 
@@ -40,3 +40,16 @@ var renderUserNameOptions = () => {
 }
 var subBtn = document.querySelector('#submit');
 //add event listener for the modal button to run the render name options for username select dropdown menu
+
+// this function returns true if username is in namelist and else false
+function checkUserName(username)
+{
+    const index = namesList.some(user => user.userName.includes('Rachel'));
+    console.log(index);
+}
+
+console.log(namesList);
+console.log(namesList.length);
+// checkUserName('VannaL');
+
+
