@@ -77,7 +77,7 @@ function getResponse(object) {
 var nameUrl = "https://sheets.googleapis.com/v4/spreadsheets/1XYp11OWdX5LIycJ07gNq6d6m13AF3ZNIhsW9xq1PKN8/?key=AIzaSyC8CJzSaxpcbUmHFLGfUkcSqTBhckWhpp0&includeGridData=true"
 axios.get(nameUrl)
     .then(response => {
-        renderUserNameOptions(response);
+        getNameDateStart(response);
     })
     .catch(error => {
         console.log(error);
