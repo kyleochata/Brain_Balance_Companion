@@ -76,7 +76,6 @@ function getResponse(object) {
         }
         masteractivityList.push(cardInfo);
     }
-
 }
 
 //pull data from user list

@@ -1,19 +1,13 @@
 var url = "https://sheets.googleapis.com/v4/spreadsheets/1rgaHm4qlXdKpJvU52u6LCGlUBekrUx_bhUoTWmJ8t8E/?key=AIzaSyC8CJzSaxpcbUmHFLGfUkcSqTBhckWhpp0&includeGridData=true";
 const masteractivityList = [];
 const namesList = [];
-var state = 0;
 axios.get(url)
     .then(function (response) {
-        // console.log(response);
-        if (masteractivityList == []) {
-            getResponse(response);
-        }
+        getResponse(response);
     })
     .catch(function (error) {
         console.log(error);
     });
-
-
 
 function getResponse(object) {
 
@@ -73,10 +67,9 @@ function getResponse(object) {
         }
         masteractivityList.push(cardInfo);
     }
-
+    masteractivityList.shift();
+    masteractivityList.unshift();
 }
-
-console.log(namesList === null);
 
 
 //pull data from user list
@@ -125,7 +118,7 @@ var getNameDateStart = (nameObject) => {
         }
         namesList.push(nameCheck);
     }
-    namesList.shift()
+    namesList.shift();
 }
 
 
@@ -235,12 +228,18 @@ function closeModal($el) {
 }
 
 // event listener for button that closes the modal for username Selection
-document.getElementById('closeSelectButton').addEventListener('click', function (event) {
-    const closestModal = event.target.closest('.modal');
-    if (closestModal) {
-        closeModal(closestModal);
-    }
+document.querySelectorAll('.closeButton').forEach(function(button)
+{
+    button.addEventListener('click', function (event) {
+        console.log(event.target);
+        const closestModal = event.target.closest('.modal');
+        if (closestModal) {
+            closeModal(closestModal);
+        }
+    });
 });
+
+
 
 const usernameModal = document.getElementById('username-modal');
 
@@ -250,7 +249,8 @@ const observer = new MutationObserver(mutationsList => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class' && !mutation.target.classList.contains('is-active')) {
             // Class attribute has been changed
             const targetElement = mutation.target;
-            update_usernames();
+            const weeks = update_usernames();
+            renderData(masteractivityList, weeks);
         }
     }
 });
@@ -263,10 +263,15 @@ observer.observe(usernameModal, config);
 var renderData = (object, weeks) => {
     let firstObject = object.shift();
     renderFirstCard(firstObject);
-    //depending on what week selected, need to manipulate object to only include up to the selected week items.
-    //if weeks=x => splice all array items after the end of the week. set at exerciseOfWeek => pass into renderRestOfCards    
-    //let exercisesOfWeek = 
-    //renderRestOfCards()
+//depending on what week selected, need to manipulate object to only include up to the selected week items.
+    let weeksObject = []
+    object.shift();
+    for (let i = 0; i < weeksObject.length; i++) {
+        if (object[i].weeks <= weeks) {
+            weeksObject.push(object[i]);
+        }
+    }
+    renderRestOfCards(weeksObject);
 }
 
 //render in the first card with info from activity list API call
@@ -329,8 +334,8 @@ var renderRestOfCards = (restOfObject) => {
     }
 }
 
-let test = document.querySelector('.cardFooterButton');
-test.addEventListener('click', changestyle)
+// let test = document.querySelector('.cardFooterButton');
+// test.addEventListener('click', changestyle)
 
 //function to change the style of card once activity is completed by user
 function changestyle() {
@@ -362,6 +367,37 @@ function update_usernames() {
         alert("no user found");
     }
     const weeksDifference = now.diff(userDate, 'week');
-    document.getElementById('titleUserInfo').textContent = "User: " + name + " Weeks: " + weeksDifference
-    console.log(weeksDifference);
+    document.getElementById('titleUserInfo').textContent = "User: " + name + " Weeks: " + weeksDifference;
+    generateWeekSelect(weeksDifference);
+    return weeksDifference;
+}
+
+function generateWeekSelect(weeks)
+{
+    // delete all existing weeks
+    document.querySelectorAll('.weeksOption').forEach((element) => {
+        element.remove();
+    });
+    let selectWeekEl = document.getElementById('week');
+    for(let i = 1;i<weeks;i++)
+    {
+        if(i > 11)
+        {
+            break;
+        }
+        let optionEl = document.createElement('option');
+        optionEl.setAttribute("class","weeksOption")
+        if(i == 11)
+        {
+            
+            optionEl.setAttribute('value', "week" + i + "+");
+            optionEl.textContent = i + "+";
+            selectWeekEl.appendChild(optionEl);
+            break;
+        }
+        optionEl.setAttribute('value', "week" + i);
+        optionEl.textContent = i;
+        selectWeekEl.appendChild(optionEl);
+    }
+    selectWeekEl.selectedIndex = (weeks < 10) ? weeks : 10;
 }
