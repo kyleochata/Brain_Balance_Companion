@@ -230,6 +230,11 @@ button:hover {
     color: #003760;
     padding: 0;
     align-items: center;
+    transition: .75s;
+}
+
+.headerTopItem:hover{
+    color: var(--main-teal)
 }
 
 #headerBottom {
@@ -469,7 +474,7 @@ button:hover {
 .youtubeChannel{
     width:100%;
     height:100%;
-    
+
 }
 
 #footerMain {
