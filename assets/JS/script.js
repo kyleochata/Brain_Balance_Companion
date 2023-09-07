@@ -225,6 +225,7 @@ document.querySelectorAll('.closeButton').forEach(function(button)
 });
 
 
+
 const usernameModal = document.getElementById('username-modal');
 
 // Create a Mutation Observer
@@ -234,7 +235,7 @@ const observer = new MutationObserver(mutationsList => {
             // Class attribute has been changed
             const targetElement = mutation.target;
             const weeks = update_usernames();
-            renderFirstCard(masteractivityList,weeks);
+            renderData(masteractivityList, weeks);
         }
     }
 });
@@ -247,10 +248,15 @@ observer.observe(usernameModal, config);
 var renderData = (object, weeks) => {
     let firstObject = object.shift();
     renderFirstCard(firstObject);
-    //depending on what week selected, need to manipulate object to only include up to the selected week items.
-    //if weeks=x => splice all array items after the end of the week. set at exerciseOfWeek => pass into renderRestOfCards    
-    //let exercisesOfWeek = 
-    //renderRestOfCards()
+//depending on what week selected, need to manipulate object to only include up to the selected week items.
+    let weeksObject = []
+    object.shift();
+    for (let i = 0; i < weeksObject.length; i++) {
+        if (object[i].weeks <= weeks) {
+            weeksObject.push(object[i]);
+        }
+    }
+    renderRestOfCards(weeksObject);
 }
 
 //render in the first card with info from activity list API call
@@ -313,8 +319,8 @@ var renderRestOfCards = (restOfObject) => {
     }
 }
 
-let test = document.querySelector('.cardFooterButton');
-test.addEventListener('click', changestyle)
+// let test = document.querySelector('.cardFooterButton');
+// test.addEventListener('click', changestyle)
 
 //function to change the style of card once activity is completed by user
 function changestyle() {
