@@ -262,6 +262,7 @@ var renderData = (object, weeks) => {
 //render in the first card with info from activity list API call
 var renderFirstCard = (firstObject) => {
     let cardDiv = document.createElement('div');
+    let activityPDiv = document.querySelector('.activityPadding');
     cardDiv.setAttribute('class', 'card activityCard column is-one-fifths');
     activityPDiv.appendChild(cardDiv);
     let cardHeader = document.createElement('div');
