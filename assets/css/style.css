@@ -484,6 +484,11 @@ button:hover {
 
 }
 
+#videoContainer{
+    display:flex;
+    flex-wrap:wrap;
+}
+
 #footerMain {
     position:relative;
     display: flex;
