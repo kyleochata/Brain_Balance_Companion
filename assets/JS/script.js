@@ -261,10 +261,9 @@ observer.observe(usernameModal, config);
 
 //function that will call renderfirst card and rest of cards based on weeks gathered from week modal; figure out where to call renderData so that the object API will get passed and the week selected userinput gets passed.
 var renderData = (object, weeks) => {
-    let firstObject = object.shift();
-    console.log(firstObject);
-    renderFirstCard(firstObject);
-//depending on what week selected, need to manipulate object to only include up to the selected week items.
+    let activityCA = document.querySelector('.activityCardAlign');
+    activityCA.innerHTML = '';
+    
     let weeksObject = []
 
     console.log(object);
@@ -278,48 +277,29 @@ var renderData = (object, weeks) => {
 
     document.querySelectorAll('.cardFooterButton').forEach(function(button) {
         button.addEventListener('click', function(event) {
-            console.log(event.target);
-            console.log(event.target.closest('.cardFooterReps')); 
-        });
+
+        let cardBody = event.target.closest('.activityCard').querySelector('.activityContent')
+        let cardRep = event.target.parentElement.querySelector('.cardFooterReps')
+        if (cardBody.style.filter == 'blur(4px)') {
+            cardBody.removeAttribute('style');
+        } else {
+            cardBody.setAttribute('style', 'filter: blur(4px)');
+        };
+    
+        if (cardRep.style.textDecoration == 'line-through') {
+            cardRep.removeAttribute('style');
+        } else {
+            cardRep.setAttribute('style', 'text-decoration: line-through');
+        };
     })
+})
 }
 
-//render in the first card with info from activity list API call
-var renderFirstCard = (firstObject) => {
-    let cardDiv = document.createElement('div');
-    let activityPDiv = document.querySelector('.activityCardAlign');
-    cardDiv.setAttribute('class', 'card activityCard column is-one-fifths');
-    activityPDiv.appendChild(cardDiv);
-    let cardHeader = document.createElement('div');
-    cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
-    cardHeader.textContent = firstObject.activity;
-    let madeCardDiv = document.querySelector('.activityCard');
-    madeCardDiv.appendChild(cardHeader);
-    let cardBody = document.createElement('div');
-    cardBody.setAttribute('class', 'card-content activityContent');
-    cardBody.textContent = firstObject.assignment;
-    madeCardDiv.appendChild(cardBody);
-    let cardFootDiv = document.createElement('div');
-    cardFootDiv.setAttribute('class', 'card-footer');
-    madeCardDiv.appendChild(cardFootDiv);
-    let cardFootReps = document.createElement('div');
-    cardFootReps.setAttribute('class', 'card-footer-item cardFooterReps');
-    cardFootReps.textContent = firstObject.quantity;
-    let madeCardFoot = document.querySelector('.card-footer')
-    madeCardFoot.appendChild(cardFootReps);
-    let cardFootBtn = document.createElement('button');
-    cardFootBtn.setAttribute('class', 'card-footer-item cardFooterButton');
-    cardFootBtn.textContent = 'Done!';
-    madeCardFoot.appendChild(cardFootBtn);
-
-
-}
-
-//function loop for generating all cards after firstcard
+//function loop for generating all cards after
 var renderRestOfCards = (restOfObject) => {
     for (let i = 0; i < restOfObject.length; i++) {
         let cardDiv = document.createElement('div');
-        cardDiv.setAttribute('class', 'card activityCard column')
+        cardDiv.setAttribute('class', 'card activityCard column is-3');
     let cardHeader = document.createElement('div');
         cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
         cardHeader.textContent = restOfObject[i].activity;
@@ -348,29 +328,7 @@ var renderRestOfCards = (restOfObject) => {
     }
 }
 
-// let test = document.querySelector('.cardFooterButton');
-// test.addEventListener('click', changestyle)
 
-//function to change the style of card once activity is completed by user
-function changestyle(event) {
-    console.log(event);
-
-    // let cardBody = event.target.closest('.activityContent');
-    let cardRep = this.closest('.cardFooterReps');
-    // console.log(cardBody);
-    console.log(cardRep);
-    if (cardBody.style.filter == 'blur(4px)') {
-        cardBody.removeAttribute('style');
-    } else {
-        cardBody.setAttribute('style', 'filter: blur(4px)');
-    };
-
-    if (cardRep.style.textDecoration == 'line-through') {
-        cardRep.removeAttribute('style');
-    } else {
-        cardRep.setAttribute('style', 'text-decoration: line-through');
-    };
-}
 // Function to change the class of the watched element
 function update_usernames() {
     const name = document.getElementById('usernameSelect').value;
