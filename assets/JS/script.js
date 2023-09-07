@@ -5,10 +5,9 @@ var state = 0;
 axios.get(url)
     .then(function (response) {
         // console.log(response);
-        if (masteractivityList == []) {
             getResponse(response);
         }
-    })
+    )
     .catch(function (error) {
         console.log(error);
     });
@@ -73,7 +72,9 @@ function getResponse(object) {
         }
         masteractivityList.push(cardInfo);
     }
-console.log(masteractivityList);
+    masteractivityList.shift();
+    masteractivityList.pop();
+    console.log(masteractivityList);
 }
 
 console.log(namesList === null);
@@ -226,6 +227,12 @@ document.getElementById('closeSelectButton').addEventListener('click', function 
         closeModal(closestModal);
     }
 });
+document.getElementById('closeSelectButton2').addEventListener('click', function (event) {
+    const closestModal = event.target.closest('.modal');
+    if (closestModal) {
+        closeModal(closestModal);
+    }
+});
 
 const usernameModal = document.getElementById('username-modal');
 
@@ -247,12 +254,17 @@ observer.observe(usernameModal, config);
 
 //function that will call renderfirst card and rest of cards based on weeks gathered from week modal; figure out where to call renderData so that the object API will get passed and the week selected userinput gets passed.
 var renderData = (object, weeks) => {
-    object.shift();
     let firstObject = object.shift();
     renderFirstCard(firstObject);
 //depending on what week selected, need to manipulate object to only include up to the selected week items.
-    let weeksObject
-    renderRestOfCards()
+    let weeksObject = []
+    object.shift();
+    for (let i = 0; i < weeksObject.length; i++) {
+        if (object[i].weeks <= weeks) {
+            weeksObject.push(object[i]);
+        }
+    }
+    renderRestOfCards(weeksObject);
 }
 
 //render in the first card with info from activity list API call
@@ -315,8 +327,8 @@ var renderRestOfCards = (restOfObject) => {
     }
 }
 
-let test = document.querySelector('.cardFooterButton');
-test.addEventListener('click', changestyle)
+// let test = document.querySelector('.cardFooterButton');
+// test.addEventListener('click', changestyle)
 
 //function to change the style of card once activity is completed by user
 function changestyle() {
