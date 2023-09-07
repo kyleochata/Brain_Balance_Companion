@@ -269,6 +269,12 @@ button:hover {
     width: 20%;
 }
 
+.headerBottomMiddle{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
 #headerBottomRight {
     display: flex;
     justify-content: flex-end;
