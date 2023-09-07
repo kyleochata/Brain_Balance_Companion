@@ -143,6 +143,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
+// Youtube API Fetch
+const apiKey = 'AIzaSyAvujvXXk3vxk-FOOQwnM8xz1F6Zem4Dz8';
+const channelId = 'UC_1-oHAzKIzhKSl6O-RkozA';
+
+const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=15`;
+fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((error) => {
+        console.error('Error fetching data:', error);
+    });
+
 //modal JS to pop
 document.addEventListener('DOMContentLoaded', () => {
     // Functions to open and close a modal
