@@ -73,7 +73,7 @@ function getResponse(object) {
         }
         masteractivityList.push(cardInfo);
     }
-
+console.log(masteractivityList);
 }
 
 console.log(namesList === null);
@@ -235,7 +235,8 @@ const observer = new MutationObserver(mutationsList => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class' && !mutation.target.classList.contains('is-active')) {
             // Class attribute has been changed
             const targetElement = mutation.target;
-            update_usernames();
+            const weeks = update_usernames();
+            renderData(masteractivityList, weeks);
         }
     }
 });
@@ -246,12 +247,12 @@ observer.observe(usernameModal, config);
 
 //function that will call renderfirst card and rest of cards based on weeks gathered from week modal; figure out where to call renderData so that the object API will get passed and the week selected userinput gets passed.
 var renderData = (object, weeks) => {
+    object.shift();
     let firstObject = object.shift();
     renderFirstCard(firstObject);
 //depending on what week selected, need to manipulate object to only include up to the selected week items.
-    //if weeks=x => splice all array items after the end of the week. set at exerciseOfWeek => pass into renderRestOfCards    
-//let exercisesOfWeek = 
-    //renderRestOfCards()
+    let weeksObject
+    renderRestOfCards()
 }
 
 //render in the first card with info from activity list API call
@@ -348,5 +349,5 @@ function update_usernames() {
     }
     const weeksDifference = now.diff(userDate, 'week');
     document.getElementById('titleUserInfo').textContent = "User: " + name + " Weeks: " + weeksDifference
-    console.log(weeksDifference);
+    return weeksDifference;
 }
