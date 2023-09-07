@@ -250,17 +250,44 @@ const observer = new MutationObserver(mutationsList => {
             // Class attribute has been changed
             const targetElement = mutation.target;
             const weeks = update_usernames();
-            renderData(masteractivityList, weeks);
+            renderData(masteractivityList,weeks,null);
         }
     }
 });
+
+
 
 // Configure the observer to watch for changes to the "class" attribute
 const config = { attributes: true, attributeFilter: ['class'] };
 observer.observe(usernameModal, config);
 
+
+const weekModal = document.getElementById('week-modal');
+
+// Create a Mutation Observer
+const observer2 = new MutationObserver(mutationsList => {
+    for (const mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class' && !mutation.target.classList.contains('is-active')) {
+            // Class attribute has been changed
+            //renderData(masteractivityList,weeks);
+            const weeks2 = document.getElementById("week").selectedIndex + 1; 
+            renderData(masteractivityList,null,weeks2);
+        }
+    }
+});
+
+
+
+// Configure the observer to watch for changes to the "class" attribute
+const config2 = { attributes: true, attributeFilter: ['class'] };
+observer2.observe(weekModal, config2);
+
+
 //function that will call renderfirst card and rest of cards based on weeks gathered from week modal; figure out where to call renderData so that the object API will get passed and the week selected userinput gets passed.
-var renderData = (object, weeks) => {
+var renderData = (object, weeks1,weeks2) => {
+    const weeks = (weeks1 !== null) ? weeks1 : weeks2 // ternary operator
+    // >= 10 then 10
+    // console.log("this is weeks" + weeks);
     let activityCA = document.querySelector('.activityCardAlign');
     activityCA.innerHTML = '';
     
@@ -272,8 +299,11 @@ var renderData = (object, weeks) => {
             weeksObject.push(object[i]);
         }
     }
-    console.log(weeksObject);
+    // console.log(weeksObject);
     renderRestOfCards(weeksObject);
+
+    const name = document.getElementById('usernameSelect').value;
+    document.getElementById('titleUserInfo').innerHTML = "User: " + name + "</br>" + " Weeks: " + weeks;
 
     document.querySelectorAll('.cardFooterButton').forEach(function(button) {
         button.addEventListener('click', function(event) {
@@ -342,7 +372,6 @@ function update_usernames() {
         alert("no user found");
     }
     const weeksDifference = now.diff(userDate, 'week');
-    document.getElementById('titleUserInfo').textContent = "User: " + name + " Weeks: " + weeksDifference;
     generateWeekSelect(weeksDifference);
     return weeksDifference;
 }
@@ -354,24 +383,24 @@ function generateWeekSelect(weeks)
         element.remove();
     });
     let selectWeekEl = document.getElementById('week');
-    for(let i = 1;i<weeks;i++)
+    for(let i = 0;i<weeks;i++)
     {
-        if(i > 11)
+        if(i > 10)
         {
             break;
         }
         let optionEl = document.createElement('option');
         optionEl.setAttribute("class","weeksOption")
-        if(i == 11)
+        if(i == 10)
         {
             
-            optionEl.setAttribute('value', "week" + i + "+");
-            optionEl.textContent = i + "+";
+            optionEl.setAttribute('value', "week" + (i+1) + "+");
+            optionEl.textContent = i+1 + "+";
             selectWeekEl.appendChild(optionEl);
             break;
         }
-        optionEl.setAttribute('value', "week" + i);
-        optionEl.textContent = i;
+        optionEl.setAttribute('value', "week" + (i+1));
+        optionEl.textContent = i+1;
         selectWeekEl.appendChild(optionEl);
     }
     selectWeekEl.selectedIndex = (weeks < 10) ? weeks : 10;
