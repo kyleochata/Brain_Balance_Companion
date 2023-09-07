@@ -336,9 +336,11 @@ button:hover {
     width: 100%;
     padding:10px;
     gap:10px;
+    display: flex;
     justify-content:space-evenly;
     align-content: center;
     margin: 0 auto !important;
+    flex-wrap: wrap;
 
 }
 

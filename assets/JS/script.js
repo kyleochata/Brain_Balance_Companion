@@ -68,7 +68,7 @@ function getResponse(object) {
         masteractivityList.push(cardInfo);
     }
     masteractivityList.shift();
-    masteractivityList.unshift();
+    masteractivityList.pop();
 }
 
 
@@ -262,22 +262,32 @@ observer.observe(usernameModal, config);
 //function that will call renderfirst card and rest of cards based on weeks gathered from week modal; figure out where to call renderData so that the object API will get passed and the week selected userinput gets passed.
 var renderData = (object, weeks) => {
     let firstObject = object.shift();
+    console.log(firstObject);
     renderFirstCard(firstObject);
 //depending on what week selected, need to manipulate object to only include up to the selected week items.
     let weeksObject = []
-    object.shift();
-    for (let i = 0; i < weeksObject.length; i++) {
+
+    console.log(object);
+    for (let i = 0; i < object.length; i++) {
         if (object[i].weeks <= weeks) {
             weeksObject.push(object[i]);
         }
     }
+    console.log(weeksObject);
     renderRestOfCards(weeksObject);
+
+    document.querySelectorAll('.cardFooterButton').forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            console.log(event.target);
+            console.log(event.target.closest('.cardFooterReps')); 
+        });
+    })
 }
 
 //render in the first card with info from activity list API call
 var renderFirstCard = (firstObject) => {
     let cardDiv = document.createElement('div');
-    let activityPDiv = document.querySelector('.activityPadding');
+    let activityPDiv = document.querySelector('.activityCardAlign');
     cardDiv.setAttribute('class', 'card activityCard column is-one-fifths');
     activityPDiv.appendChild(cardDiv);
     let cardHeader = document.createElement('div');
@@ -287,51 +297,54 @@ var renderFirstCard = (firstObject) => {
     madeCardDiv.appendChild(cardHeader);
     let cardBody = document.createElement('div');
     cardBody.setAttribute('class', 'card-content activityContent');
-    cardBody.textContent = firstObject.quantity;
+    cardBody.textContent = firstObject.assignment;
     madeCardDiv.appendChild(cardBody);
     let cardFootDiv = document.createElement('div');
     cardFootDiv.setAttribute('class', 'card-footer');
     madeCardDiv.appendChild(cardFootDiv);
     let cardFootReps = document.createElement('div');
     cardFootReps.setAttribute('class', 'card-footer-item cardFooterReps');
-    cardFootReps.textContent = firstObject.assignment;
-    madeCardDiv.appendChild(cardFootReps);
+    cardFootReps.textContent = firstObject.quantity;
+    let madeCardFoot = document.querySelector('.card-footer')
+    madeCardFoot.appendChild(cardFootReps);
     let cardFootBtn = document.createElement('button');
     cardFootBtn.setAttribute('class', 'card-footer-item cardFooterButton');
     cardFootBtn.textContent = 'Done!';
-    madeCardDiv.appendChild(cardFootBtn);
-    let madeFootBtn = document.querySelector('.cardFooterButton');
-    madeFootBtn.addEventListener('click', changestyle)
+    madeCardFoot.appendChild(cardFootBtn);
+
+
 }
 
 //function loop for generating all cards after firstcard
 var renderRestOfCards = (restOfObject) => {
     for (let i = 0; i < restOfObject.length; i++) {
         let cardDiv = document.createElement('div');
-        cardDiv.setAttribute('class', 'card activityCard column');
-        activityPDiv.appendChild(cardDiv);
-        let cardHeader = document.createElement('div');
+        cardDiv.setAttribute('class', 'card activityCard column')
+    let cardHeader = document.createElement('div');
         cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
-        cardHeader.textContent = restOfObject.activity;
-        let madeCardDiv = document.querySelector('.activityCard');
-        madeCardDiv.appendChild(cardHeader);
+        cardHeader.textContent = restOfObject[i].activity;
+
+        cardDiv.appendChild(cardHeader);
         let cardBody = document.createElement('div');
         cardBody.setAttribute('class', 'card-content activityContent');
-        cardBody.textContent = restOfObject.quantity;
-        madeCardDiv.appendChild(cardBody);
+        cardBody.textContent = restOfObject[i].assignment;
+        cardDiv.appendChild(cardBody);
         let cardFootDiv = document.createElement('div');
         cardFootDiv.setAttribute('class', 'card-footer');
-        madeCardDiv.appendChild(cardFootDiv);
+
         let cardFootReps = document.createElement('div');
         cardFootReps.setAttribute('class', 'card-footer-item cardFooterReps');
-        cardFootReps.textContent = restOfObject.assignment;
-        madeCardDiv.appendChild(cardFootReps);
+        cardFootReps.textContent = restOfObject[i].quantity;
+
+        cardFootDiv.appendChild(cardFootReps);
         let cardFootBtn = document.createElement('button');
         cardFootBtn.setAttribute('class', 'card-footer-item cardFooterButton');
         cardFootBtn.textContent = 'Done!';
-        madeCardDiv.appendChild(cardFootBtn);
-        let madeFootBtn = document.querySelector('.cardFooterButton');
-        madeFootBtn.addEventListener('click', changestyle)
+        cardFootDiv.appendChild(cardFootBtn);
+
+        let activityContainer = document.querySelector('.activityCardAlign');
+        cardDiv.appendChild(cardFootDiv);
+        activityContainer.appendChild(cardDiv);
     }
 }
 
@@ -339,10 +352,13 @@ var renderRestOfCards = (restOfObject) => {
 // test.addEventListener('click', changestyle)
 
 //function to change the style of card once activity is completed by user
-function changestyle() {
-    let cardBody = document.querySelector('.activityContent');
-    let cardRep = document.querySelector('.cardFooterReps');
+function changestyle(event) {
+    console.log(event);
 
+    // let cardBody = event.target.closest('.activityContent');
+    let cardRep = this.closest('.cardFooterReps');
+    // console.log(cardBody);
+    console.log(cardRep);
     if (cardBody.style.filter == 'blur(4px)') {
         cardBody.removeAttribute('style');
     } else {
