@@ -150,20 +150,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
 // Youtube API Fetch
 const apiKey = 'AIzaSyAvujvXXk3vxk-FOOQwnM8xz1F6Zem4Dz8';
 const channelId = 'UC_1-oHAzKIzhKSl6O-RkozA';
 
 const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=15`;
 fetch(apiUrl)
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((error) => {
-    console.error('Error fetching data:', error);
-  });
-
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((error) => {
+        console.error('Error fetching data:', error);
+    });
 
 //modal JS to pop
 document.addEventListener('DOMContentLoaded', () => {
@@ -182,12 +182,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-   // Add a click event on buttons to open a specific modal
+    // Add a click event on buttons to open a specific modal
     (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
         const modal = $trigger.dataset.target;
         console.log(modal);
         const $target = document.getElementById(modal);
-console.log($target);
+        console.log($target);
         $trigger.addEventListener('click', () => {
             openModal($target);
         });
@@ -263,16 +263,16 @@ observer.observe(usernameModal, config);
 var renderData = (object, weeks) => {
     let firstObject = object.shift();
     renderFirstCard(firstObject);
-//depending on what week selected, need to manipulate object to only include up to the selected week items.
+    //depending on what week selected, need to manipulate object to only include up to the selected week items.
     //if weeks=x => splice all array items after the end of the week. set at exerciseOfWeek => pass into renderRestOfCards    
-//let exercisesOfWeek = 
+    //let exercisesOfWeek = 
     //renderRestOfCards()
 }
 
 //render in the first card with info from activity list API call
 var renderFirstCard = (firstObject) => {
     let cardDiv = document.createElement('div');
-    cardDiv. setAttribute('class', 'card activityCard column is-one-fifths');
+    cardDiv.setAttribute('class', 'card activityCard column is-one-fifths');
     activityPDiv.appendChild(cardDiv);
     let cardHeader = document.createElement('div');
     cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
@@ -302,30 +302,30 @@ var renderFirstCard = (firstObject) => {
 var renderRestOfCards = (restOfObject) => {
     for (let i = 0; i < restOfObject.length; i++) {
         let cardDiv = document.createElement('div');
-    cardDiv. setAttribute('class', 'card activityCard column');
-    activityPDiv.appendChild(cardDiv);
-    let cardHeader = document.createElement('div');
-    cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
-    cardHeader.textContent = restOfObject.activity;
-    let madeCardDiv = document.querySelector('.activityCard');
-    madeCardDiv.appendChild(cardHeader);
-    let cardBody = document.createElement('div');
-    cardBody.setAttribute('class', 'card-content activityContent');
-    cardBody.textContent = restOfObject.quantity;
-    madeCardDiv.appendChild(cardBody);
-    let cardFootDiv = document.createElement('div');
-    cardFootDiv.setAttribute('class', 'card-footer');
-    madeCardDiv.appendChild(cardFootDiv);
-    let cardFootReps = document.createElement('div');
-    cardFootReps.setAttribute('class', 'card-footer-item cardFooterReps');
-    cardFootReps.textContent = restOfObject.assignment;
-    madeCardDiv.appendChild(cardFootReps);
-    let cardFootBtn = document.createElement('button');
-    cardFootBtn.setAttribute('class', 'card-footer-item cardFooterButton');
-    cardFootBtn.textContent = 'Done!';
-    madeCardDiv.appendChild(cardFootBtn);
-    let madeFootBtn = document.querySelector('.cardFooterButton');
-    madeFootBtn.addEventListener('click', changestyle)
+        cardDiv.setAttribute('class', 'card activityCard column');
+        activityPDiv.appendChild(cardDiv);
+        let cardHeader = document.createElement('div');
+        cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
+        cardHeader.textContent = restOfObject.activity;
+        let madeCardDiv = document.querySelector('.activityCard');
+        madeCardDiv.appendChild(cardHeader);
+        let cardBody = document.createElement('div');
+        cardBody.setAttribute('class', 'card-content activityContent');
+        cardBody.textContent = restOfObject.quantity;
+        madeCardDiv.appendChild(cardBody);
+        let cardFootDiv = document.createElement('div');
+        cardFootDiv.setAttribute('class', 'card-footer');
+        madeCardDiv.appendChild(cardFootDiv);
+        let cardFootReps = document.createElement('div');
+        cardFootReps.setAttribute('class', 'card-footer-item cardFooterReps');
+        cardFootReps.textContent = restOfObject.assignment;
+        madeCardDiv.appendChild(cardFootReps);
+        let cardFootBtn = document.createElement('button');
+        cardFootBtn.setAttribute('class', 'card-footer-item cardFooterButton');
+        cardFootBtn.textContent = 'Done!';
+        madeCardDiv.appendChild(cardFootBtn);
+        let madeFootBtn = document.querySelector('.cardFooterButton');
+        madeFootBtn.addEventListener('click', changestyle)
     }
 }
 

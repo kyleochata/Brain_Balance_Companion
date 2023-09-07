@@ -189,12 +189,13 @@ header {
 
 button {
     font-family: 'Metropolis Semi';
-    font-size: 1.3vw;
+    font-size: clamp(12px, 1.3vw, 20px);
     font-weight: bold;
     background-color: var(--main-green);
     border-radius: 5px;
     border: 0px;
     color: white;
+    max-width: 200px;
 }
 
 button:hover {
