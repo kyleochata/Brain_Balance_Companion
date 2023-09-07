@@ -68,7 +68,8 @@ function getResponse(object) {
         masteractivityList.push(cardInfo);
     }
     masteractivityList.shift();
-    masteractivityList.unshift();
+    masteractivityList.pop();
+    console.log(masteractivityList);
 }
 
 
@@ -246,6 +247,7 @@ observer.observe(usernameModal, config);
 
 //function that will call renderfirst card and rest of cards based on weeks gathered from week modal; figure out where to call renderData so that the object API will get passed and the week selected userinput gets passed.
 var renderData = (object, weeks) => {
+    console.log(object);
     let firstObject = object.shift();
     renderFirstCard(firstObject);
 //depending on what week selected, need to manipulate object to only include up to the selected week items.
@@ -262,6 +264,7 @@ var renderData = (object, weeks) => {
 //render in the first card with info from activity list API call
 var renderFirstCard = (firstObject) => {
     let cardDiv = document.createElement('div');
+    let activityPDiv = document.getElementById
     cardDiv.setAttribute('class', 'card activityCard column is-one-fifths');
     activityPDiv.appendChild(cardDiv);
     let cardHeader = document.createElement('div');
