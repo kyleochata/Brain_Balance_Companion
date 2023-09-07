@@ -69,7 +69,6 @@ function getResponse(object) {
     }
     masteractivityList.shift();
     masteractivityList.pop();
-    console.log(masteractivityList);
 }
 
 
@@ -143,6 +142,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+
+// Youtube API Fetch
+const apiKey = 'AIzaSyAvujvXXk3vxk-FOOQwnM8xz1F6Zem4Dz8';
+const channelId = 'UC_1-oHAzKIzhKSl6O-RkozA';
+
+const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=15`;
+fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+    })
+    .catch((error) => {
+        console.error('Error fetching data:', error);
+    });
 
 //modal JS to pop
 document.addEventListener('DOMContentLoaded', () => {
@@ -236,112 +250,115 @@ const observer = new MutationObserver(mutationsList => {
             // Class attribute has been changed
             const targetElement = mutation.target;
             const weeks = update_usernames();
-            renderData(masteractivityList, weeks);
+            renderData(masteractivityList,weeks,null);
         }
     }
 });
+
+
 
 // Configure the observer to watch for changes to the "class" attribute
 const config = { attributes: true, attributeFilter: ['class'] };
 observer.observe(usernameModal, config);
 
+
+const weekModal = document.getElementById('week-modal');
+
+// Create a Mutation Observer
+const observer2 = new MutationObserver(mutationsList => {
+    for (const mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class' && !mutation.target.classList.contains('is-active')) {
+            // Class attribute has been changed
+            //renderData(masteractivityList,weeks);
+            const weeks2 = document.getElementById("week").selectedIndex + 1; 
+            renderData(masteractivityList,null,weeks2);
+        }
+    }
+});
+
+
+
+// Configure the observer to watch for changes to the "class" attribute
+const config2 = { attributes: true, attributeFilter: ['class'] };
+observer2.observe(weekModal, config2);
+
+
 //function that will call renderfirst card and rest of cards based on weeks gathered from week modal; figure out where to call renderData so that the object API will get passed and the week selected userinput gets passed.
-var renderData = (object, weeks) => {
-    console.log(object);
-    let firstObject = object.shift();
-    renderFirstCard(firstObject);
-//depending on what week selected, need to manipulate object to only include up to the selected week items.
+var renderData = (object, weeks1,weeks2) => {
+    const weeks = (weeks1 !== null) ? weeks1 : weeks2 // ternary operator
+    // >= 10 then 10
+    // console.log("this is weeks" + weeks);
+    let activityCA = document.querySelector('.activityCardAlign');
+    activityCA.innerHTML = '';
+    
     let weeksObject = []
-    object.shift();
-    for (let i = 0; i < weeksObject.length; i++) {
+
+    console.log(object);
+    for (let i = 0; i < object.length; i++) {
         if (object[i].weeks <= weeks) {
             weeksObject.push(object[i]);
         }
     }
+    // console.log(weeksObject);
     renderRestOfCards(weeksObject);
+
+    const name = document.getElementById('usernameSelect').value;
+    document.getElementById('titleUserInfo').innerHTML = "User: " + name + "</br>" + " Weeks: " + weeks;
+
+    document.querySelectorAll('.cardFooterButton').forEach(function(button) {
+        button.addEventListener('click', function(event) {
+
+        let cardBody = event.target.closest('.activityCard').querySelector('.activityContent')
+        let cardRep = event.target.parentElement.querySelector('.cardFooterReps')
+        if (cardBody.style.filter == 'blur(4px)') {
+            cardBody.removeAttribute('style');
+        } else {
+            cardBody.setAttribute('style', 'filter: blur(4px)');
+        };
+    
+        if (cardRep.style.textDecoration == 'line-through') {
+            cardRep.removeAttribute('style');
+        } else {
+            cardRep.setAttribute('style', 'text-decoration: line-through');
+        };
+    })
+})
 }
 
-//render in the first card with info from activity list API call
-var renderFirstCard = (firstObject) => {
-    let cardDiv = document.createElement('div');
-    let activityPDiv = document.getElementById
-    cardDiv.setAttribute('class', 'card activityCard column is-one-fifths');
-    activityPDiv.appendChild(cardDiv);
-    let cardHeader = document.createElement('div');
-    cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
-    cardHeader.textContent = firstObject.activity;
-    let madeCardDiv = document.querySelector('.activityCard');
-    madeCardDiv.appendChild(cardHeader);
-    let cardBody = document.createElement('div');
-    cardBody.setAttribute('class', 'card-content activityContent');
-    cardBody.textContent = firstObject.quantity;
-    madeCardDiv.appendChild(cardBody);
-    let cardFootDiv = document.createElement('div');
-    cardFootDiv.setAttribute('class', 'card-footer');
-    madeCardDiv.appendChild(cardFootDiv);
-    let cardFootReps = document.createElement('div');
-    cardFootReps.setAttribute('class', 'card-footer-item cardFooterReps');
-    cardFootReps.textContent = firstObject.assignment;
-    madeCardDiv.appendChild(cardFootReps);
-    let cardFootBtn = document.createElement('button');
-    cardFootBtn.setAttribute('class', 'card-footer-item cardFooterButton');
-    cardFootBtn.textContent = 'Done!';
-    madeCardDiv.appendChild(cardFootBtn);
-    let madeFootBtn = document.querySelector('.cardFooterButton');
-    madeFootBtn.addEventListener('click', changestyle)
-}
-
-//function loop for generating all cards after firstcard
+//function loop for generating all cards after
 var renderRestOfCards = (restOfObject) => {
     for (let i = 0; i < restOfObject.length; i++) {
         let cardDiv = document.createElement('div');
-        cardDiv.setAttribute('class', 'card activityCard column');
-        activityPDiv.appendChild(cardDiv);
-        let cardHeader = document.createElement('div');
+        cardDiv.setAttribute('class', 'card activityCard column is-3');
+    let cardHeader = document.createElement('div');
         cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
-        cardHeader.textContent = restOfObject.activity;
-        let madeCardDiv = document.querySelector('.activityCard');
-        madeCardDiv.appendChild(cardHeader);
+        cardHeader.textContent = restOfObject[i].activity;
+
+        cardDiv.appendChild(cardHeader);
         let cardBody = document.createElement('div');
         cardBody.setAttribute('class', 'card-content activityContent');
-        cardBody.textContent = restOfObject.quantity;
-        madeCardDiv.appendChild(cardBody);
+        cardBody.textContent = restOfObject[i].assignment;
+        cardDiv.appendChild(cardBody);
         let cardFootDiv = document.createElement('div');
         cardFootDiv.setAttribute('class', 'card-footer');
-        madeCardDiv.appendChild(cardFootDiv);
+
         let cardFootReps = document.createElement('div');
         cardFootReps.setAttribute('class', 'card-footer-item cardFooterReps');
-        cardFootReps.textContent = restOfObject.assignment;
-        madeCardDiv.appendChild(cardFootReps);
+        cardFootReps.textContent = restOfObject[i].quantity;
+
+        cardFootDiv.appendChild(cardFootReps);
         let cardFootBtn = document.createElement('button');
         cardFootBtn.setAttribute('class', 'card-footer-item cardFooterButton');
         cardFootBtn.textContent = 'Done!';
-        madeCardDiv.appendChild(cardFootBtn);
-        let madeFootBtn = document.querySelector('.cardFooterButton');
-        madeFootBtn.addEventListener('click', changestyle)
+        cardFootDiv.appendChild(cardFootBtn);
+
+        let activityContainer = document.querySelector('.activityCardAlign');
+        cardDiv.appendChild(cardFootDiv);
+        activityContainer.appendChild(cardDiv);
     }
 }
 
-// let test = document.querySelector('.cardFooterButton');
-// test.addEventListener('click', changestyle)
 
-//function to change the style of card once activity is completed by user
-function changestyle() {
-    let cardBody = document.querySelector('.activityContent');
-    let cardRep = document.querySelector('.cardFooterReps');
-
-    if (cardBody.style.filter == 'blur(4px)') {
-        cardBody.removeAttribute('style');
-    } else {
-        cardBody.setAttribute('style', 'filter: blur(4px)');
-    };
-
-    if (cardRep.style.textDecoration == 'line-through') {
-        cardRep.removeAttribute('style');
-    } else {
-        cardRep.setAttribute('style', 'text-decoration: line-through');
-    };
-}
 // Function to change the class of the watched element
 function update_usernames() {
     const name = document.getElementById('usernameSelect').value;
@@ -355,7 +372,6 @@ function update_usernames() {
         alert("no user found");
     }
     const weeksDifference = now.diff(userDate, 'week');
-    document.getElementById('titleUserInfo').textContent = "User: " + name + " Weeks: " + weeksDifference;
     generateWeekSelect(weeksDifference);
     return weeksDifference;
 }
@@ -367,24 +383,24 @@ function generateWeekSelect(weeks)
         element.remove();
     });
     let selectWeekEl = document.getElementById('week');
-    for(let i = 1;i<weeks;i++)
+    for(let i = 0;i<weeks;i++)
     {
-        if(i > 11)
+        if(i > 10)
         {
             break;
         }
         let optionEl = document.createElement('option');
         optionEl.setAttribute("class","weeksOption")
-        if(i == 11)
+        if(i == 10)
         {
             
-            optionEl.setAttribute('value', "week" + i + "+");
-            optionEl.textContent = i + "+";
+            optionEl.setAttribute('value', "week" + (i+1) + "+");
+            optionEl.textContent = i+1 + "+";
             selectWeekEl.appendChild(optionEl);
             break;
         }
-        optionEl.setAttribute('value', "week" + i);
-        optionEl.textContent = i;
+        optionEl.setAttribute('value', "week" + (i+1));
+        optionEl.textContent = i+1;
         selectWeekEl.appendChild(optionEl);
     }
     selectWeekEl.selectedIndex = (weeks < 10) ? weeks : 10;

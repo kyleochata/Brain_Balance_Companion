@@ -17,26 +17,25 @@
 <body>
   <header>
     <section id="headerTop" class="columns">
-      <div class="column is-offset-half  headerTopItem"><img src="./assets/imgs/phone-removebg-preview.png" alt="phone"
-          style="width: 50px; height: 50px; margin-right: 7px">800.555.5500</div>
-      <div class="column headerTopItem"><img src="./assets/imgs/location-removebg-preview.png" alt="Find a Location"
-          style="height: 25px; margin-right: 7px">FIND A CENTER</div>
-      <div class="column headerTopItem">
+      <a href="tel:+18008775500" alt="Call 800.555.5500" class="column is-offset-half  headerTopItem"><img src="./assets/imgs/phone-removebg-preview.png" alt="phone"
+          style="width: 50px; height: 50px; margin-right: 7px">800.555.5500</a>
+      <a href="https://www.brainbalancecenters.com/locations" alt="Find a Location" target="_blank" class="column headerTopItem"><img src="./assets/imgs/location-removebg-preview.png" alt="Find a Location"
+          style="height: 25px; margin-right: 7px">FIND A CENTER</a>
+      <a  href="https://franchise.brainbalancecenters.com/?_ga=2.144629621.1950756010.1694062172-577801165.1693940524&_gac=1.53616986.1693940524.CjwKCAjwo9unBhBTEiwAipC114DdKDgTsufQHQpVkQIWUXQChHEiDLWLDjMi-cB0919OZjJvqp7YSxoCFYEQAvD_BwE" alt="own a franchise" target="_blank" class="column headerTopItem">
         <img src="./assets/imgs/ownFranchise-removebg-preview.png" alt="own a center"
           style="width: 35px; margin-right: 7px">
         <p>OWN A CENTER</p>
-      </div>
+      </a>
 
 
     </section>
 
     <section id="headerBottom" class="columns">
-      <div class="column is-half"><img src="./assets/imgs/BBLogo.png" alt="Brain Balance Logo" id=headerLogo></div>
+      <div class="column is-one-third"><img src="./assets/imgs/BBLogo.png" alt="Brain Balance Logo" id=headerLogo></div>
       <div class="column">
         <div class="columns" id="headerBottomRight">
-          <div id="titleUserInfo" class="headerBottomRightItem">User: xxx Week: yyy</div>
-          <button class="column is-offset-half headerBottomRightItem js-modal-trigger" data-target="username-modal" id="username">UserName</button>
-          <button class="column headerBottomRightItem js-modal-trigger" data-target="week-modal" id=pickWeek>Pick Week</button>
+          <button class="column headerBottomRightItem js-modal-trigger" data-target="username-modal" id="username">UserName</button>
+          <button class="column headerBottomRightItem js-modal-trigger" data-target="week-modal" id='pickWeek'>Pick Week</button>
         </div>
       </div>
 
@@ -46,33 +45,16 @@
   <main>
     <section id="activitiesList">
       <div class="activitiesHead">
-        <h2 class="weekTitle1">Exercises for</h2>
-        <h2 class="weekTitle2">Week 1</h2>
+        <h2 class="weekTitle1">Activities</h2>
+        <div id="titleUserInfo" class="headerBottomMiddle column"></div>
       </div>
       <!-- possible Ul to Li dynamic generate -->
-      <div class="exerciseListMainContainer">
+      <div class="activityListMainContainer">
 
-        <div class="exerciseListContainer">
-          <div class="activityPadding columns">
+        <div class="activityListContainer">
+          <div class="activityCardAlign columns">
 
-            <!-- all dynamically generated cards should have a class of column -->
-            <!-- <div class="card activityCard column is-one-fifths">
-              <div class="card-header activityCardHeader columns">
-                  Superman
-              </div>
-              <div class="card-content activityContent">
-                This is the description of the activity which will exist here for all to see, and complete with reckless abandon. This is the description of the activity which will exist here for all to see, and complete with reckless abandon. This is the description of the activity which will exist here for all to see, and complete with reckless abandon. This is the description of the activity which will exist here for all to see, and complete with reckless abandon. This is the description of the activity which will exist here for all to see, and complete with reckless abandon. 
-              </div>
-              <div class="card-footer">
-                <div class="card-footer-item cardFooterReps">
-                  25
-                </div>
-                <button class="card-footer-item cardFooterButton">
-                  Done!
-                </button>
-
-              </div>
-            </div> -->
+          
           </div>
         </div>
       </div>
@@ -81,7 +63,23 @@
 
       <section id="resourcesContainer">
         <h2 class="resourcesTitle">Resources</h2>
-        <div id="resourcesContents">
+        <div class="columns" id="resourcesContent">
+          <div class="column resourcesLeft">
+            <h2 class="resourcesLeftHeader">Program Links</h2>
+            <hr class="dividerResourcesLeft">
+            <ul class="resourcesList">
+              <li class="resourcesLi"><a href="https://www.brainbalancecenters.com/blog/how-does-the-brain-balance-program-work" target="_blank" class="resourcesListLinks">How It Works</a></li>
+              <li class="resourcesLi"><a href="https://www.brainbalancecenters.com/our-program" target="_blank" class="resourcesListLinks">Program Overview</a></li>
+              <li class="resourcesLi"><a href="https://www.brainbalancecenters.com/our-program/childs-personalized-plan" target="_blank" class="resourcesListLinks">Personalized Plan</a></li>
+              <li class="resourcesLi"><a href="https://www.brainbalancecenters.com/brain-balance-program-research-and-results" target="_blank" class="resourcesListLinks">Research</a></li>
+              <li class="resourcesLi"><a href="https://www.brainbalancecenters.com/brain-balance-virtual-program" target="_blank" class="resourcesListLinks">Virtual Program</a></li>
+              <li class="resourcesLi"><a href="https://www.brainbalancecenters.com/online-assessment" target="_blank" class="resourcesListLinks">Online Quiz</a></li>
+            </ul>
+          </div>
+          <div class="column is-four-fifths resourcesRight">
+            the youtube channel will populate here with a playlist and possibly a search bar
+           
+          </div>
         </div>
         <!-- video api or iframe youtube ch for brain balance. -->
       </section>
@@ -90,12 +88,14 @@
 
 
   </main>
-
-  <footer>
+  
+  <footer id="footerMain">
+    <div id="footerInvert"></div>
     <div class="footerContents">
       <h3>Made by Adrian C, Steve M, and Kyle E.</h3>
-      <a>link to code</a>
+      <a id="footerLink">link to code</a>
     </div>
+
   </footer>
 
   <!-- username modal -->
