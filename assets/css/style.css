@@ -204,6 +204,7 @@ button:hover {
     transition: all 1.5s, color 0.3s 0.3s;
 }
 
+
 #headerTop {
     display: flex;
     border-bottom: 1px rgba(0, 0, 0, 0.15) solid;
@@ -253,6 +254,7 @@ button:hover {
     border-bottom: 0px;
     filter: drop-shadow(0px 5px 4px grey);
     padding: 40px 35px 30px;
+    z-index: 1;
 }
 
 #headerLogo {
@@ -318,11 +320,17 @@ button:hover {
     line-height: 3rem;
 }
 
-.activityPadding {
-    padding:20px
+.activityCardAlign {
+    width: 100%;
+    padding:10px;
+    gap:10px;
+    justify-content:space-evenly;
+    align-content: center;
+    margin: 0 auto !important;
+
 }
 
-.exerciseListMainContainer{
+.activityListMainContainer{
     display: flex;
     text-align: center;
     background-color: white;
@@ -335,18 +343,20 @@ button:hover {
     padding: 6px
 }
 
-.exerciseListContainer{
+.activityListContainer{
+    display: flex;
     background-color: var(--main-orange);
     width: 100%;
     border-radius: 10px;
-    padding: 10px;
-
+    margin: 0 auto;
+    padding: 0;
 }
 
+/* TO DO: need to make this 1/3 at m screen and flex column at small screen.  Looks good as is down to 880px.*/
 .activityCard{
-   max-width: 200px; 
-
-   z-index: 0;
+    max-width: 200px; 
+    height: 250px;
+    z-index: 0;
 }
 
 .activityCardHeader{
@@ -364,11 +374,16 @@ button:hover {
     font-size: 10px;
     margin: 0 0 8px 0;
     padding: 2px;
+    height: 130px;
+    overflow:auto;
+}
+
+.card-footer{
+    height:45px;
 }
 
 .cardFooterButton{
     margin:7px;
-
 }
 
 .divider{
@@ -386,10 +401,9 @@ button:hover {
     align-items: center;
     flex-direction: column;
     border-radius: 10px;
-    padding:6px;
+    padding: 6px;
+    margin: 0 auto;
 }
-
-
 
 .resourcesTitle{
     background-color: white;
@@ -401,30 +415,99 @@ button:hover {
     line-height: 40px;
 }
 
-#resourcesContents{
+#resourcesContent{
+    width: 100%;
     background-color: white;
-    margin-top:6px;
+    margin: 6px 0px 0px 0px;
     border-radius: 0px 0px 5px 5px;
-    padding:10px;
 }
 
-footer {
+.resourcesLeft{
+    
+    text-align: left;
+    border-radius: 0px 0px 0px 5px;
+}
+
+.resourcesLeftHeader{
+    font-size: 20px;
+}
+
+.dividerResourcesLeft{
+    border:2px solid var(--main-teal);
+    background-color: var(--main-teal);
+    border-radius: 2px;
+    margin: 0;
+    width: 25%;
+    margin-top: 5px;
+}
+
+.resourcesList{
+    margin-top: 5px;
+    transition: all 2s ease-in-out;
+}
+
+.resourcesLi{
+    padding: 5px;
+}
+
+.resourcesListLinks{
+    font-family: Metropolis;
+    color: var(--main-blue);
+    transition: .75s;
+}
+
+.resourcesListLinks:hover{
+    color: var(--main-orange);
+}
+
+.resourcesRight{
+    padding:10px;
+    border-radius: 0px 0px 5px 0px;
+    
+}
+
+.youtubeChannel{
+    width:100%;
+    height:100%;
+    
+}
+
+#footerMain {
+    position:relative;
     display: flex;
-    width:95%;
-    margin: 0 auto;
-    height: var(--nav-height);
-    padding-top: 10px;
-    margin-bottom: 5px;
-    border-top: 1px rgba(0, 0, 0, .15) solid;
-    margin-top: 20px;
+    width:100%;
+    padding: 10px;
+    margin-top: -15px;
+    height: 65px;
+    text-align: center;
+    background-color: var(--main-blue);
+    color: white;
+    z-index: 0;
+    margin-top: 1px;
+}
+
+#footerInvert{
+    position:absolute;
+    background-color: white;
+    height: 15px;
+    border-bottom-left-radius: 60% 2vw;
+    border-bottom-right-radius: 60% 2vw;
+    margin-top: 3px;
+    z-index: 1;
+    right:0;
+    left:0;
+    bottom:77%;
 
 }
 
 .footerContents{
     display: flex;
-    align-content: center;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 10px 10px 10px;
-    width:100%;
+    width:100%; 
+    padding-top: 15px;
+}
+
+#footerLink{
+    text-decoration: none;
 }

@@ -20,6 +20,20 @@ window.addEventListener("scroll", () => {
 });
 });
 
+// Youtube API Fetch
+const apiKey = 'AIzaSyAvujvXXk3vxk-FOOQwnM8xz1F6Zem4Dz8';
+const channelId = 'UC_1-oHAzKIzhKSl6O-RkozA';
+
+const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=15`;
+fetch(apiUrl)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.error('Error fetching data:', error);
+  });
+
 
 
 //When modal button gets clicked: need to add the JS from BUlma to get modal to pop up. fxn then will take all the username data from sheets and render them in as options for the select (dropdown menu) element in modal that will pop up.
