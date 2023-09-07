@@ -1,18 +1,13 @@
 var url = "https://sheets.googleapis.com/v4/spreadsheets/1rgaHm4qlXdKpJvU52u6LCGlUBekrUx_bhUoTWmJ8t8E/?key=AIzaSyC8CJzSaxpcbUmHFLGfUkcSqTBhckWhpp0&includeGridData=true";
 const masteractivityList = [];
 const namesList = [];
-var state = 0;
 axios.get(url)
     .then(function (response) {
-        // console.log(response);
-            getResponse(response);
-        }
-    )
+        getResponse(response);
+    })
     .catch(function (error) {
         console.log(error);
     });
-
-
 
 function getResponse(object) {
 
@@ -73,11 +68,8 @@ function getResponse(object) {
         masteractivityList.push(cardInfo);
     }
     masteractivityList.shift();
-    masteractivityList.pop();
-    console.log(masteractivityList);
+    masteractivityList.unshift();
 }
-
-console.log(namesList === null);
 
 
 //pull data from user list
@@ -126,7 +118,7 @@ var getNameDateStart = (nameObject) => {
         }
         namesList.push(nameCheck);
     }
-    namesList.shift()
+    namesList.shift();
 }
 
 
@@ -168,12 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-   // Add a click event on buttons to open a specific modal
+    // Add a click event on buttons to open a specific modal
     (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
         const modal = $trigger.dataset.target;
         console.log(modal);
         const $target = document.getElementById(modal);
-console.log($target);
+        console.log($target);
         $trigger.addEventListener('click', () => {
             openModal($target);
         });
@@ -221,18 +213,18 @@ function closeModal($el) {
 }
 
 // event listener for button that closes the modal for username Selection
-document.getElementById('closeSelectButton').addEventListener('click', function (event) {
-    const closestModal = event.target.closest('.modal');
-    if (closestModal) {
-        closeModal(closestModal);
-    }
+document.querySelectorAll('.closeButton').forEach(function(button)
+{
+    button.addEventListener('click', function (event) {
+        console.log(event.target);
+        const closestModal = event.target.closest('.modal');
+        if (closestModal) {
+            closeModal(closestModal);
+        }
+    });
 });
-document.getElementById('closeSelectButton2').addEventListener('click', function (event) {
-    const closestModal = event.target.closest('.modal');
-    if (closestModal) {
-        closeModal(closestModal);
-    }
-});
+
+
 
 const usernameModal = document.getElementById('username-modal');
 
@@ -270,7 +262,7 @@ var renderData = (object, weeks) => {
 //render in the first card with info from activity list API call
 var renderFirstCard = (firstObject) => {
     let cardDiv = document.createElement('div');
-    cardDiv. setAttribute('class', 'card activityCard column is-one-fifths');
+    cardDiv.setAttribute('class', 'card activityCard column is-one-fifths');
     activityPDiv.appendChild(cardDiv);
     let cardHeader = document.createElement('div');
     cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
@@ -300,30 +292,30 @@ var renderFirstCard = (firstObject) => {
 var renderRestOfCards = (restOfObject) => {
     for (let i = 0; i < restOfObject.length; i++) {
         let cardDiv = document.createElement('div');
-    cardDiv. setAttribute('class', 'card activityCard column');
-    activityPDiv.appendChild(cardDiv);
-    let cardHeader = document.createElement('div');
-    cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
-    cardHeader.textContent = restOfObject.activity;
-    let madeCardDiv = document.querySelector('.activityCard');
-    madeCardDiv.appendChild(cardHeader);
-    let cardBody = document.createElement('div');
-    cardBody.setAttribute('class', 'card-content activityContent');
-    cardBody.textContent = restOfObject.quantity;
-    madeCardDiv.appendChild(cardBody);
-    let cardFootDiv = document.createElement('div');
-    cardFootDiv.setAttribute('class', 'card-footer');
-    madeCardDiv.appendChild(cardFootDiv);
-    let cardFootReps = document.createElement('div');
-    cardFootReps.setAttribute('class', 'card-footer-item cardFooterReps');
-    cardFootReps.textContent = restOfObject.assignment;
-    madeCardDiv.appendChild(cardFootReps);
-    let cardFootBtn = document.createElement('button');
-    cardFootBtn.setAttribute('class', 'card-footer-item cardFooterButton');
-    cardFootBtn.textContent = 'Done!';
-    madeCardDiv.appendChild(cardFootBtn);
-    let madeFootBtn = document.querySelector('.cardFooterButton');
-    madeFootBtn.addEventListener('click', changestyle)
+        cardDiv.setAttribute('class', 'card activityCard column');
+        activityPDiv.appendChild(cardDiv);
+        let cardHeader = document.createElement('div');
+        cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
+        cardHeader.textContent = restOfObject.activity;
+        let madeCardDiv = document.querySelector('.activityCard');
+        madeCardDiv.appendChild(cardHeader);
+        let cardBody = document.createElement('div');
+        cardBody.setAttribute('class', 'card-content activityContent');
+        cardBody.textContent = restOfObject.quantity;
+        madeCardDiv.appendChild(cardBody);
+        let cardFootDiv = document.createElement('div');
+        cardFootDiv.setAttribute('class', 'card-footer');
+        madeCardDiv.appendChild(cardFootDiv);
+        let cardFootReps = document.createElement('div');
+        cardFootReps.setAttribute('class', 'card-footer-item cardFooterReps');
+        cardFootReps.textContent = restOfObject.assignment;
+        madeCardDiv.appendChild(cardFootReps);
+        let cardFootBtn = document.createElement('button');
+        cardFootBtn.setAttribute('class', 'card-footer-item cardFooterButton');
+        cardFootBtn.textContent = 'Done!';
+        madeCardDiv.appendChild(cardFootBtn);
+        let madeFootBtn = document.querySelector('.cardFooterButton');
+        madeFootBtn.addEventListener('click', changestyle)
     }
 }
 
@@ -360,6 +352,37 @@ function update_usernames() {
         alert("no user found");
     }
     const weeksDifference = now.diff(userDate, 'week');
-    document.getElementById('titleUserInfo').textContent = "User: " + name + " Weeks: " + weeksDifference
+    document.getElementById('titleUserInfo').textContent = "User: " + name + " Weeks: " + weeksDifference;
+    generateWeekSelect(weeksDifference);
     return weeksDifference;
+}
+
+function generateWeekSelect(weeks)
+{
+    // delete all existing weeks
+    document.querySelectorAll('.weeksOption').forEach((element) => {
+        element.remove();
+    });
+    let selectWeekEl = document.getElementById('week');
+    for(let i = 1;i<weeks;i++)
+    {
+        if(i > 11)
+        {
+            break;
+        }
+        let optionEl = document.createElement('option');
+        optionEl.setAttribute("class","weeksOption")
+        if(i == 11)
+        {
+            
+            optionEl.setAttribute('value', "week" + i + "+");
+            optionEl.textContent = i + "+";
+            selectWeekEl.appendChild(optionEl);
+            break;
+        }
+        optionEl.setAttribute('value', "week" + i);
+        optionEl.textContent = i;
+        selectWeekEl.appendChild(optionEl);
+    }
+    selectWeekEl.selectedIndex = (weeks < 10) ? weeks : 10;
 }
