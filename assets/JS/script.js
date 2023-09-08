@@ -362,6 +362,7 @@ document.querySelectorAll('.closeButton').forEach(function (button) {
 
 let heroRemoved = false;
 const usernameModal = document.getElementById('username-modal');
+document.getElementById('activityDisplay').style.display = 'none';
 // Create a Mutation Observer
 const observer = new MutationObserver(mutationsList => {
     for (const mutation of mutationsList) {
@@ -373,6 +374,7 @@ const observer = new MutationObserver(mutationsList => {
             if (heroRemoved == false)
             {
                 document.getElementById('heroShowHide').remove();
+                document.getElementById('activityDisplay').style.display = 'flex';
                 heroRemoved = true;
             }
         }

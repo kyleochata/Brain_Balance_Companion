@@ -272,6 +272,14 @@ button:hover {
     width: 20%;
 }
 
+#activityDisplay
+{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .headerBottomMiddle {
     display: flex;
     align-content: center;
