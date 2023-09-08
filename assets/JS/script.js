@@ -164,25 +164,6 @@ function fetchAndDisplayVideos(pageToken = '') {
         });
 }
 
-// // Function to display videos in a grid on load
-// function displayVideos(videos) {
-//     const videoGrid = document.getElementById('videoGrid');
-//     videoGrid.innerHTML = '';
-
-//     videos.forEach((video) => {
-//         const videoElement = document.createElement('div');
-//         videoElement.classList.add('videoThumbnail');
-//         videoElement.classList.add('column');
-//         videoElement.classList.add('is-3');
-//         videoElement.innerHTML = `
-//         <iframe src="https://www.youtube.com/embed/${video.id.videoId}" frameborder="0" allowfullscreen></iframe>
-//         <h2>${video.snippet.title}</h2>
-//     `;
-//         videoGrid.appendChild(videoElement);
-//     });
-
-//     updatePageInfo();
-// }
 
 // Function to update pagination info
 function updatePageInfo() {
