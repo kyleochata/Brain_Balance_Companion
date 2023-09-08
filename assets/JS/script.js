@@ -68,7 +68,7 @@ function getResponse(object) {
         masteractivityList.push(cardInfo);
     }
     masteractivityList.shift();
-    masteractivityList.unshift();
+    masteractivityList.pop();
 }
 
 
@@ -162,329 +162,375 @@ function fetchAndDisplayVideos(pageToken = '') {
         .catch((error) => {
             console.error('Error fetching data:', error);
         });
-    }
+}
 
-    // // Function to display videos in a grid on load
-    // function displayVideos(videos) {
-    //     const videoGrid = document.getElementById('videoGrid');
-    //     videoGrid.innerHTML = '';
+// // Function to display videos in a grid on load
+// function displayVideos(videos) {
+//     const videoGrid = document.getElementById('videoGrid');
+//     videoGrid.innerHTML = '';
 
-    //     videos.forEach((video) => {
-    //         const videoElement = document.createElement('div');
-    //         videoElement.classList.add('videoThumbnail');
-    //         videoElement.classList.add('column');
-    //         videoElement.classList.add('is-3');
-    //         videoElement.innerHTML = `
-    //         <iframe src="https://www.youtube.com/embed/${video.id.videoId}" frameborder="0" allowfullscreen></iframe>
-    //         <h2>${video.snippet.title}</h2>
-    //     `;
-    //         videoGrid.appendChild(videoElement);
-    //     });
+//     videos.forEach((video) => {
+//         const videoElement = document.createElement('div');
+//         videoElement.classList.add('videoThumbnail');
+//         videoElement.classList.add('column');
+//         videoElement.classList.add('is-3');
+//         videoElement.innerHTML = `
+//         <iframe src="https://www.youtube.com/embed/${video.id.videoId}" frameborder="0" allowfullscreen></iframe>
+//         <h2>${video.snippet.title}</h2>
+//     `;
+//         videoGrid.appendChild(videoElement);
+//     });
 
-    //     updatePageInfo();
-    // }
+//     updatePageInfo();
+// }
 
-    // Function to update pagination info
-    function updatePageInfo() {
-        const pageInfo = document.getElementById('pageInfo');
-        // !!!Add / total pages here just couldn't get it functioning quickly
-        pageInfo.textContent = `Page ${currentPage}`;
-    }
+// Function to update pagination info
+function updatePageInfo() {
+    const pageInfo = document.getElementById('pageInfo');
+    // !!!Add / total pages here just couldn't get it functioning quickly
+    pageInfo.textContent = `Page ${currentPage}`;
+}
 
-    // Function to load the initial videos on page load
-    window.onload = () => {
-        fetchAndDisplayVideos();
-    };
+// Function to load the initial videos on page load
+window.onload = () => {
+    fetchAndDisplayVideos();
+};
 
-    //Youtube video search
-    function searchVideos() {
-        const searchInput = document.getElementById('searchInput').value;
-        const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=12&pageToken=${nextPageToken}&q=${searchInput}`;
+//Youtube video search
+function searchVideos() {
+    const searchInput = document.getElementById('searchInput').value;
+    const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=12&pageToken=${nextPageToken}&q=${searchInput}`;
 
-        fetch(apiUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                nextPageToken = data.nextPageToken || '';
-                displayVideos(data.items);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-    }
-    // Youtube display
-    function displayVideos(videos) {
-        const videoContainer = document.getElementById('videoContainer');
-        videoContainer.innerHTML = '';
+    fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+            nextPageToken = data.nextPageToken || '';
+            displayVideos(data.items);
+        })
+        .catch((error) => {
+            console.error('Error fetching data:', error);
+        });
+}
+// Youtube display
+function displayVideos(videos) {
+    const videoContainer = document.getElementById('videoContainer');
+    videoContainer.innerHTML = '';
 
-        videos.forEach((video) => {
-            const videoElement = document.createElement('div');
-            videoElement.classList.add('videoThumbnail')
-            videoElement.classList.add('column')
-            videoElement.classList.add('is-3');
-            videoElement.innerHTML = `
+    videos.forEach((video) => {
+        const videoElement = document.createElement('div');
+        videoElement.classList.add('videoThumbnail')
+        videoElement.classList.add('column')
+        videoElement.classList.add('is-3');
+        videoElement.innerHTML = `
                 <iframe width=100% src="https://www.youtube.com/embed/${video.id.videoId}" frameborder="0" allowfullscreen></iframe>
                 <h2>${video.snippet.title}</h2>
             `;
-            videoContainer.appendChild(videoElement);
-        });
-
-        updatePageInfo();
-    }
-
-    function updatePageInfo() {
-        const pageInfo = document.getElementById('pageInfo');
-        pageInfo.textContent = `Page ${currentPage}`;
-    }
-
-    function previousPage() {
-        if (currentPage > 1) {
-            currentPage--;
-            searchVideos();
-        }
-    }
-
-    function nextPage() {
-        currentPage++;
-        searchVideos();
-    }
-
-
-
-    //modal JS to pop
-    document.addEventListener('DOMContentLoaded', () => {
-        // Functions to open and close a modal
-        function openModal($el) {
-            $el.classList.add('is-active');
-        }
-
-        function closeModal($el) {
-            $el.classList.remove('is-active');
-        }
-
-        function closeAllModals() {
-            (document.querySelectorAll('.modal') || []).forEach(($modal) => {
-                closeModal($modal);
-            });
-        }
-
-        // Add a click event on buttons to open a specific modal
-        (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-            const modal = $trigger.dataset.target;
-            console.log(modal);
-            const $target = document.getElementById(modal);
-            console.log($target);
-            $trigger.addEventListener('click', () => {
-                openModal($target);
-            });
-        });
-
-
-
-        // Add a click event on various child elements to close the parent modal
-        (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-            const $target = $close.closest('.modal');
-
-            $close.addEventListener('click', () => {
-                closeModal($target);
-            });
-        });
-
-        // Add a keyboard event to close all modals
-        document.addEventListener('keydown', (event) => {
-            if (event.code === 'Escape') {
-                closeAllModals();
-            }
-        });
+        videoContainer.appendChild(videoElement);
     });
 
+    updatePageInfo();
+}
 
-    //When modal button gets clicked: need to add the JS from BUlma to get modal to pop up. fxn then will take all the username data from sheets and render them in as options for the select (dropdown menu) element in modal that will pop up.
-    var renderUserNameOptions = (namesList) => {
+function updatePageInfo() {
+    const pageInfo = document.getElementById('pageInfo');
+    pageInfo.textContent = `Page ${currentPage}`;
+}
 
-        let namesOnly = [];
-        for (let i = 0; i < namesList.length; i++) {
-            namesOnly.push(namesList[i].userName);
-        };
-        let selectNameEl = document.querySelector('#usernameSelect');
-        for (let i = 0; i < namesOnly.length; i++) {
-            let optionEl = document.createElement('option');
-            optionEl.setAttribute('value', namesOnly[i]);
-            optionEl.textContent = namesOnly[i];
-            selectNameEl.appendChild(optionEl);
-        }
+function previousPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        searchVideos();
+    }
+}
+
+function nextPage() {
+    currentPage++;
+    searchVideos();
+}
+
+
+
+//modal JS to pop
+document.addEventListener('DOMContentLoaded', () => {
+    // Functions to open and close a modal
+    function openModal($el) {
+        $el.classList.add('is-active');
     }
 
-    // helper function to close modal
     function closeModal($el) {
         $el.classList.remove('is-active');
     }
 
-    // event listener for button that closes the modal for username Selection
-    document.querySelectorAll('.closeButton').forEach(function (button) {
-        button.addEventListener('click', function (event) {
-            console.log(event.target);
-            const closestModal = event.target.closest('.modal');
-            if (closestModal) {
-                closeModal(closestModal);
-            }
+    function closeAllModals() {
+        (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+            closeModal($modal);
+        });
+    }
+
+    // Add a click event on buttons to open a specific modal
+    (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+        const modal = $trigger.dataset.target;
+        console.log(modal);
+        const $target = document.getElementById(modal);
+        console.log($target);
+        $trigger.addEventListener('click', () => {
+            openModal($target);
         });
     });
 
 
 
-    const usernameModal = document.getElementById('username-modal');
+    // Add a click event on various child elements to close the parent modal
+    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+        const $target = $close.closest('.modal');
+
+        $close.addEventListener('click', () => {
+            closeModal($target);
+        });
+    });
+
+    // Add a keyboard event to close all modals
+    document.addEventListener('keydown', (event) => {
+        if (event.code === 'Escape') {
+            closeAllModals();
+        }
+    });
+});
+
+
+//When modal button gets clicked: need to add the JS from BUlma to get modal to pop up. fxn then will take all the username data from sheets and render them in as options for the select (dropdown menu) element in modal that will pop up.
+var renderUserNameOptions = (namesList) => {
+
+    let namesOnly = [];
+    for (let i = 0; i < namesList.length; i++) {
+        namesOnly.push(namesList[i].userName);
+    };
+    let selectNameEl = document.querySelector('#usernameSelect');
+    for (let i = 0; i < namesOnly.length; i++) {
+        let optionEl = document.createElement('option');
+        optionEl.setAttribute('value', namesOnly[i]);
+        optionEl.textContent = namesOnly[i];
+        selectNameEl.appendChild(optionEl);
+    }
+}
+
+// helper function to close modal
+function closeModal($el) {
+    $el.classList.remove('is-active');
+}
+
+// event listener for button that closes the modal for username Selection
+document.querySelectorAll('.closeButton').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+        console.log(event.target);
+        const closestModal = event.target.closest('.modal');
+        if (closestModal) {
+            closeModal(closestModal);
+        }
+    });
+});
+
+//NOTE THIS SCRIPT IS NOT RUNNING AFTER MERGING, BUT I BLEIEVE THIS HAS BEEN RECONFIGURED BY ADRIAN AND WILL BE RECONCILED WITH HIS MERGE
+// Configure the observer to watch for changes to the "class" attribute
+// const config = { attributes: true, attributeFilter: ['class'] };
+// observer.observe(usernameModal, config);
+
+//function that will call renderfirst card and rest of cards based on weeks gathered from week modal; figure out where to call renderData so that the object API will get passed and the week selected userinput gets passed.
+var renderData = (object, weeks) => {
+    let firstObject = object.shift();
+    renderFirstCard(firstObject);
+    //depending on what week selected, need to manipulate object to only include up to the selected week items.
+    let weeksObject = []
+    object.shift();
+    for (let i = 0; i < weeksObject.length; i++) {
+        if (object[i].weeks <= weeks) {
+            weeksObject.push(object[i]);
+        }
+    }
+    renderRestOfCards(weeksObject);
+}
+//When modal button gets clicked: need to add the JS from BUlma to get modal to pop up. fxn then will take all the username data from sheets and render them in as options for the select (dropdown menu) element in modal that will pop up.
+var renderUserNameOptions = (namesList) => {
+
+    let namesOnly = [];
+    for (let i = 0; i < namesList.length; i++) {
+        namesOnly.push(namesList[i].userName);
+    };
+    let selectNameEl = document.querySelector('#usernameSelect');
+    for (let i = 0; i < namesOnly.length; i++) {
+        let optionEl = document.createElement('option');
+        optionEl.setAttribute('value', namesOnly[i]);
+        optionEl.textContent = namesOnly[i];
+        selectNameEl.appendChild(optionEl);
+    }
+}
+
+// helper function to close modal
+function closeModal($el) {
+    $el.classList.remove('is-active');
+}
+
+// event listener for button that closes the modal for username Selection
+document.querySelectorAll('.closeButton').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+        console.log(event.target);
+        const closestModal = event.target.closest('.modal');
+        if (closestModal) {
+            closeModal(closestModal);
+        }
+    });
+});
+
+
+
+const usernameModal = document.getElementById('username-modal');
+
+// Create a Mutation Observer
+const observer = new MutationObserver(mutationsList => {
+    for (const mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class' && !mutation.target.classList.contains('is-active')) {
+            // Class attribute has been changed
+            const targetElement = mutation.target;
+            const weeks = update_usernames();
+            renderData(masteractivityList, weeks, null);
+        }
+    }
+    });
+
+    const weekModal = document.getElementById('week-modal');
 
     // Create a Mutation Observer
-    const observer = new MutationObserver(mutationsList => {
+    const observer2 = new MutationObserver(mutationsList => {
         for (const mutation of mutationsList) {
             if (mutation.type === 'attributes' && mutation.attributeName === 'class' && !mutation.target.classList.contains('is-active')) {
                 // Class attribute has been changed
-                const targetElement = mutation.target;
-                const weeks = update_usernames();
-                renderData(masteractivityList, weeks);
+                //renderData(masteractivityList,weeks);
+                const weeks2 = document.getElementById("week").selectedIndex + 1;
+                renderData(masteractivityList, null, weeks2);
             }
         }
     });
 
+
+
     // Configure the observer to watch for changes to the "class" attribute
-    const config = { attributes: true, attributeFilter: ['class'] };
-    observer.observe(usernameModal, config);
+    const config2 = { attributes: true, attributeFilter: ['class'] };
+    observer2.observe(weekModal, config2);
+
 
     //function that will call renderfirst card and rest of cards based on weeks gathered from week modal; figure out where to call renderData so that the object API will get passed and the week selected userinput gets passed.
-    var renderData = (object, weeks) => {
-        let firstObject = object.shift();
-        renderFirstCard(firstObject);
-        //depending on what week selected, need to manipulate object to only include up to the selected week items.
+    var renderData = (object, weeks1, weeks2) => {
+        const weeks = (weeks1 !== null) ? weeks1 : weeks2 // ternary operator
+        // >= 10 then 10
+        // console.log("this is weeks" + weeks);
+        let activityCA = document.querySelector('.activityCardAlign');
+        activityCA.innerHTML = '';
+
         let weeksObject = []
-        object.shift();
-        for (let i = 0; i < weeksObject.length; i++) {
+
+        console.log(object);
+        for (let i = 0; i < object.length; i++) {
             if (object[i].weeks <= weeks) {
                 weeksObject.push(object[i]);
             }
         }
+        // console.log(weeksObject);
         renderRestOfCards(weeksObject);
+
+        const name = document.getElementById('usernameSelect').value;
+        document.getElementById('titleUserInfo').innerHTML = "User: " + name + "</br>" + " Weeks: " + weeks;
+
+        document.querySelectorAll('.cardFooterButton').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+
+                let cardBody = event.target.closest('.activityCard').querySelector('.activityContent')
+                let cardRep = event.target.parentElement.querySelector('.cardFooterReps')
+                if (cardBody.style.filter == 'blur(4px)') {
+                    cardBody.removeAttribute('style');
+                } else {
+                    cardBody.setAttribute('style', 'filter: blur(4px)');
+                };
+
+                if (cardRep.style.textDecoration == 'line-through') {
+                    cardRep.removeAttribute('style');
+                } else {
+                    cardRep.setAttribute('style', 'text-decoration: line-through');
+                };
+            })
+        })
     }
 
-    //render in the first card with info from activity list API call
-    var renderFirstCard = (firstObject) => {
-        let cardDiv = document.createElement('div');
-        cardDiv.setAttribute('class', 'card activityCard column is-one-fifths');
-        activityPDiv.appendChild(cardDiv);
-        let cardHeader = document.createElement('div');
-        cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
-        cardHeader.textContent = firstObject.activity;
-        let madeCardDiv = document.querySelector('.activityCard');
-        madeCardDiv.appendChild(cardHeader);
-        let cardBody = document.createElement('div');
-        cardBody.setAttribute('class', 'card-content activityContent');
-        cardBody.textContent = firstObject.quantity;
-        madeCardDiv.appendChild(cardBody);
-        let cardFootDiv = document.createElement('div');
-        cardFootDiv.setAttribute('class', 'card-footer');
-        madeCardDiv.appendChild(cardFootDiv);
-        let cardFootReps = document.createElement('div');
-        cardFootReps.setAttribute('class', 'card-footer-item cardFooterReps');
-        cardFootReps.textContent = firstObject.assignment;
-        madeCardDiv.appendChild(cardFootReps);
-        let cardFootBtn = document.createElement('button');
-        cardFootBtn.setAttribute('class', 'card-footer-item cardFooterButton');
-        cardFootBtn.textContent = 'Done!';
-        madeCardDiv.appendChild(cardFootBtn);
-        let madeFootBtn = document.querySelector('.cardFooterButton');
-        madeFootBtn.addEventListener('click', changestyle)
-    }
-
-    //function loop for generating all cards after firstcard
+    //function loop for generating all cards after
     var renderRestOfCards = (restOfObject) => {
         for (let i = 0; i < restOfObject.length; i++) {
             let cardDiv = document.createElement('div');
-            cardDiv.setAttribute('class', 'card activityCard column');
-            activityPDiv.appendChild(cardDiv);
+            cardDiv.setAttribute('class', 'card activityCard column is-3');
             let cardHeader = document.createElement('div');
             cardHeader.setAttribute('class', 'card-header activityCardHeader columns');
-            cardHeader.textContent = restOfObject.activity;
-            let madeCardDiv = document.querySelector('.activityCard');
-            madeCardDiv.appendChild(cardHeader);
+            cardHeader.textContent = restOfObject[i].activity;
+
+            cardDiv.appendChild(cardHeader);
             let cardBody = document.createElement('div');
             cardBody.setAttribute('class', 'card-content activityContent');
-            cardBody.textContent = restOfObject.quantity;
-            madeCardDiv.appendChild(cardBody);
+            cardBody.textContent = restOfObject[i].assignment;
+            cardDiv.appendChild(cardBody);
             let cardFootDiv = document.createElement('div');
             cardFootDiv.setAttribute('class', 'card-footer');
-            madeCardDiv.appendChild(cardFootDiv);
+
             let cardFootReps = document.createElement('div');
             cardFootReps.setAttribute('class', 'card-footer-item cardFooterReps');
-            cardFootReps.textContent = restOfObject.assignment;
-            madeCardDiv.appendChild(cardFootReps);
+            cardFootReps.textContent = restOfObject[i].quantity;
+
+            cardFootDiv.appendChild(cardFootReps);
             let cardFootBtn = document.createElement('button');
             cardFootBtn.setAttribute('class', 'card-footer-item cardFooterButton');
             cardFootBtn.textContent = 'Done!';
-            madeCardDiv.appendChild(cardFootBtn);
-            let madeFootBtn = document.querySelector('.cardFooterButton');
-            madeFootBtn.addEventListener('click', changestyle)
+            cardFootDiv.appendChild(cardFootBtn);
+
+            let activityContainer = document.querySelector('.activityCardAlign');
+            cardDiv.appendChild(cardFootDiv);
+            activityContainer.appendChild(cardDiv);
         }
     }
 
-    // let test = document.querySelector('.cardFooterButton');
-    // test.addEventListener('click', changestyle)
 
-    //function to change the style of card once activity is completed by user
-    function changestyle() {
-        let cardBody = document.querySelector('.activityContent');
-        let cardRep = document.querySelector('.cardFooterReps');
-
-        if (cardBody.style.filter == 'blur(4px)') {
-            cardBody.removeAttribute('style');
-        } else {
-            cardBody.setAttribute('style', 'filter: blur(4px)');
-        };
-
-        if (cardRep.style.textDecoration == 'line-through') {
-            cardRep.removeAttribute('style');
-        } else {
-            cardRep.setAttribute('style', 'text-decoration: line-through');
-        };
-    }
-    // Function to change the class of the watched element
-    function update_usernames() {
-        const name = document.getElementById('usernameSelect').value;
-        const index = namesList.findIndex(user => user.userName.includes(name));
-        let now = dayjs();
-        let userDate;
-        if (index !== -1) {
-            console.log(namesList[index]);
-            userDate = dayjs(namesList[index].startDate);
-        } else {
-            alert("no user found");
-        }
-        const weeksDifference = now.diff(userDate, 'week');
-        document.getElementById('titleUserInfo').textContent = "User: " + name + " Weeks: " + weeksDifference;
-        generateWeekSelect(weeksDifference);
-        return weeksDifference;
-    }
-
-    function generateWeekSelect(weeks) {
-        // delete all existing weeks
-        document.querySelectorAll('.weeksOption').forEach((element) => {
-            element.remove();
-        });
-        let selectWeekEl = document.getElementById('week');
-        for (let i = 1; i < weeks; i++) {
-            if (i > 11) {
-                break;
+        // Function to change the class of the watched element
+        function update_usernames() {
+            const name = document.getElementById('usernameSelect').value;
+            const index = namesList.findIndex(user => user.userName.includes(name));
+            let now = dayjs();
+            let userDate;
+            if (index !== -1) {
+                console.log(namesList[index]);
+                userDate = dayjs(namesList[index].startDate);
+            } else {
+                alert("no user found");
             }
-            let optionEl = document.createElement('option');
-            optionEl.setAttribute("class", "weeksOption")
-            if (i == 11) {
+            const weeksDifference = now.diff(userDate, 'week');
+            generateWeekSelect(weeksDifference);
+            return weeksDifference;
+        }
 
-                optionEl.setAttribute('value', "week" + i + "+");
-                optionEl.textContent = i + "+";
+        function generateWeekSelect(weeks) {
+            // delete all existing weeks
+            document.querySelectorAll('.weeksOption').forEach((element) => {
+                element.remove();
+            });
+            let selectWeekEl = document.getElementById('week');
+            for (let i = 0; i < weeks; i++) {
+                if (i > 10) {
+                    break;
+                }
+                let optionEl = document.createElement('option');
+                optionEl.setAttribute("class", "weeksOption")
+                if (i == 10) {
+
+                    optionEl.setAttribute('value', "week" + (i + 1) + "+");
+                    optionEl.textContent = i + 1 + "+";
+                    selectWeekEl.appendChild(optionEl);
+                }
+                optionEl.setAttribute('value', "week" + (i + 1));
+                optionEl.textContent = i + 1;
                 selectWeekEl.appendChild(optionEl);
-                break;
             }
-            optionEl.setAttribute('value', "week" + i);
-            optionEl.textContent = i;
-            selectWeekEl.appendChild(optionEl);
         }
-        selectWeekEl.selectedIndex = (weeks < 10) ? weeks : 10;
-    }

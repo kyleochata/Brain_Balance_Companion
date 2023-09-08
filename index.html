@@ -19,12 +19,12 @@
     <section id="headerTop" class="columns">
       <a href="tel:+18008775500" alt="Call 800.555.5500" class="column is-offset-half  headerTopItem"><img
           src="./assets/imgs/phone-removebg-preview.png" alt="phone"
-          style="width: 50px; height: 50px; margin-right: 7px">800.555.5500</a>
+          style="height: 25px; margin-right: 7px">800.555.5500</a>
       <a href="https://www.brainbalancecenters.com/locations" alt="Find a Location" target="_blank"
         class="column headerTopItem"><img src="./assets/imgs/location-removebg-preview.png" alt="Find a Location"
           style="height: 25px; margin-right: 7px">FIND A CENTER</a>
       <a href="https://franchise.brainbalancecenters.com/?_ga=2.144629621.1950756010.1694062172-577801165.1693940524&_gac=1.53616986.1693940524.CjwKCAjwo9unBhBTEiwAipC114DdKDgTsufQHQpVkQIWUXQChHEiDLWLDjMi-cB0919OZjJvqp7YSxoCFYEQAvD_BwE"
-        alt="own a franchise" target="_blank" class="column headerTopItem">
+        alt="own a franchise" style="height: 25px;" target="_blank" class="column headerTopItem">
         <img src="./assets/imgs/ownFranchise-removebg-preview.png" alt="own a center"
           style="width: 35px; margin-right: 7px">
         <p>OWN A CENTER</p>
@@ -32,20 +32,17 @@
 
 
     </section>
+    </header>
     <section id="headerBottom" class="columns">
       <div class="column is-one-third"><img src="./assets/imgs/BBLogo.png" alt="Brain Balance Logo" id=headerLogo></div>
-      <div id="titleUserInfo" class="headerBottomMiddle column">User: xxx Week: yyy</div>
       <div class="column">
         <div class="columns" id="headerBottomRight">
-          <button class="column headerBottomRightItem js-modal-trigger" data-target="username-modal"
-            id="username">UserName</button>
-          <button class="column headerBottomRightItem js-modal-trigger" data-target="week-modal" id=pickWeek>Pick
-            Week</button>
+          <button class="column headerBottomRightItem js-modal-trigger" data-target="username-modal" id="username">UserName</button>
+          <button class="column headerBottomRightItem js-modal-trigger" data-target="week-modal" id='pickWeek'>Pick Week</button>
         </div>
       </div>
 
     </section>
-
 
 
     <main>
@@ -54,7 +51,6 @@
       <section id="activitiesList">
         <div id="heroShowHide">
           <div class="heroTextContainer">
-            <!-- Add text here -->
             <h1 id="heroText">Welcome!
               <br><br>
               Use the buttons on the top right to pick a week or choose your username.
@@ -68,7 +64,7 @@
         </div>
         <div class="activitiesHead">
           <h2 class="weekTitle1">Activities for</h2>
-          <h2 class="weekTitle2">Week 1</h2>
+          <div id="titleUserInfo" class="headerBottomMiddle column"></div>
         </div>
         <!-- possible Ul to Li dynamic generate -->
         <div class="activityListMainContainer">
@@ -76,105 +72,8 @@
           <div class="activityListContainer">
             <div class="activityCardAlign columns">
 
-              <!-- all dynamically generated cards should have a class of column -->
-              <!-- <div class="card activityCard column is-one-fifths">
-              <div class="card-header activityCardHeader columns">
-                Superman
-              </div>
-              <div class="card-content activityContent">
-                This is the description of the activity which will exist here for all to see, and complete with reckless
-                abandon. This is the description of the activity which will exist here for all to see, and complete with
-                reckless abandon. This is the description of the activity which will exist here for all to see, and
-                complete with reckless abandon. This is the description of the activity which will exist here for all to
-                see, and complete with reckless abandon. This is the description of the activity which will exist here
-                for all to see, and complete with reckless abandon.
-              </div>
-              <div class="card-footer">
-                <div class="card-footer-item cardFooterReps">
-                  2
-                </div>
-                <button class="card-footer-item cardFooterButton">
-                  Done!
-                </button>
-              </div>
-            </div>
-
-            <div class="card activityCard column is-one-fifths">
-              <div class="card-header activityCardHeader columns">
-                Superman
-              </div>
-              <div class="card-content activityContent">
-                This is the description of the activity which will exist here for all to see, and complete with reckless
-                abandon. This is the description of the activity which will exist here for all to see, and complete with
-                reckless abandon. This is the description of
-              </div>
-              <div class="card-footer">
-                <div class="card-footer-item cardFooterReps">
-                  1
-                </div>
-                <button class="card-footer-item cardFooterButton">
-                  Done!
-                </button>
-              </div>
-            </div>
-
-            <div class="card activityCard column is-one-fifths">
-              <div class="card-header activityCardHeader columns">
-                Superman
-              </div>
-              <div class="card-content activityContent">
-                This is the description of the activity which will exist here for all to see, and complete with reckless
-                abandon. This is the description of the activity which will exist here for all to see, and complete with
-                reckless abandon. This is the description of the activity which will exist here for all to see, and
-                complete with reckless abandon. This is the description of the activity which will exist here for all to
-                see, and complete with reckless abandon. This is the description of the activity which will exist here
-                for all to see, and complete with reckless abandon.
-              </div>
-              <div class="card-footer">
-                <div class="card-footer-item cardFooterReps">
-                  15
-                </div>
-                <button class="card-footer-item cardFooterButton">
-                  Done!
-                </button>
-              </div>
-            </div>
-
-            <div class="card activityCard column is-one-fifths">
-              <div class="card-header activityCardHeader columns">
-                Superman
-              </div>
-              <div class="card-content activityContent">
-                This is the description of the activity which will exist here for all to see, and complete with reckless
-                abandon. This is the description of the activity which will exist here for all to see, and complete with
-                reckless abandon.
-              </div>
-              <div class="card-footer">
-                <div class="card-footer-item cardFooterReps">
-                  25
-                </div>
-                <button class="card-footer-item cardFooterButton">
-                  Done!
-                </button>
-              </div>
-            </div>
-
-            <div class="card activityCard column is-one-fifths">
-              <div class="card-header activityCardHeader columns">
-                Superman
-              </div>
-              <div class="card-content activityContent">
-                This is the description of the activity which will exist here for all to see.
-              </div>
-              <div class="card-footer">
-                <div class="card-footer-item cardFooterReps">
-                  10
-                </div>
-                <button class="card-footer-item cardFooterButton">
-                  Done!
-                </button>
-              </div>
-            </div> -->
+              <!-- all dynamically generated cards should have a class of "column is-3" -->
+              
             </div>
           </div>
         </div>
