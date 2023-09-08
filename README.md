@@ -12,15 +12,15 @@ Page Wire-frame:
 Card Wire-frame:
 ![card-wireframe](./assets/imgs/card-wireframe.png)
 
-Our deployed application can be found [here](). Below are screenshots of the deployed application. We were able to execute from our initial idea and wire-frame and create a site that satisfies our internal acceptance criteria of making the Brain Balance service more interactable and user-friendly than a google sheet with information. A challenge we faced was taking the initial idea and trying to find all the moving pieces to make it a reality.  Another challenge we experienced during this project was working as a part of a team on GitHub. Having to work through the merging and resolving of conflicts took some getting used. 
+Our deployed application can be found [here](https://kyleochata.github.io/Project-1-SAK/). Below are screenshots of the deployed application. We were able to execute from our initial idea and wire-frame and create a site that satisfies our internal acceptance criteria of making the Brain Balance service more interactable and user-friendly than a google sheet with information. A challenge we faced was taking the initial idea and trying to find all the moving pieces to make it a reality.  Another challenge we experienced during this project was working as a part of a team on GitHub. Having to work through the merging and resolving of conflicts took some getting used. 
 
 Deployed Application on load:
-![deployed app-screenshot]()
+![deployed app-screenshot](./assets/imgs/deployed-app-on-load.png)
 
 Deployed Application after interaction with Username & Weeks buttons:
-![after-interaction screenshot of app]()
+![after-interaction screenshot of app](./assets/imgs/deployed-app-after-modal-interact.png)
 
-In the future, if we were to partner with the company to further develop this project, we would like to introduce new technologies to bring the application up to the latest modern standards. Another development we would like to implement in future iterations is to have access to Brain Balance's private library of exercise videos and display them directly to the card with that particular exercise. 
+In the future, if we were to partner with the company to further develop this project, we would like to introduce new technologies to bring the application up to the latest modern standards. Another development we would like to implement in future iterations is to have access to Brain Balance's private library of exercise videos and display them directly to the card for that particular exercise. Other items we would like to see implemented, would be adding a comment section that is tied to the user for the parent/user to interact with their Brain Balance coach, sorting the exercises by category, skill level (etc.); in other words making the application even more user-friendly and giving the user more options to customize their experience with the application. 
 
 ## Installation
 
