@@ -332,8 +332,8 @@ document.querySelectorAll('.closeButton').forEach(function (button) {
 
 //NOTE THIS SCRIPT IS NOT RUNNING AFTER MERGING, BUT I BLEIEVE THIS HAS BEEN RECONFIGURED BY ADRIAN AND WILL BE RECONCILED WITH HIS MERGE
 // Configure the observer to watch for changes to the "class" attribute
-// const config = { attributes: true, attributeFilter: ['class'] };
-// observer.observe(usernameModal, config);
+const config = { attributes: true, attributeFilter: ['class'] };
+observer.observe(usernameModal, config);
 
 //function that will call renderfirst card and rest of cards based on weeks gathered from week modal; figure out where to call renderData so that the object API will get passed and the week selected userinput gets passed.
 var renderData = (object, weeks) => {
