@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // Youtube API Fetch
-const apiKey = 'AIzaSyBOVNI7-8ipc-srfAywA9N5sQE7j07UQOM';
+const apiKey = 'AIzaSyAvujvXXk3vxk-FOOQwnM8xz1F6Zem4Dz8';
 const channelId = 'UC_1-oHAzKIzhKSl6O-RkozA';
 let nextPageToken = '';
 let currentPage = 1;
@@ -363,6 +363,7 @@ document.querySelectorAll('.closeButton').forEach(function (button) {
 
 let heroRemoved = false;
 const usernameModal = document.getElementById('username-modal');
+
 // Create a Mutation Observer
 const observer = new MutationObserver(mutationsList => {
     for (const mutation of mutationsList) {
@@ -408,6 +409,14 @@ observer2.observe(weekModal, config2);
 //function that will call renderfirst card and rest of cards based on weeks gathered from week modal; figure out where to call renderData so that the object API will get passed and the week selected userinput gets passed.
 var renderData = (object, weeks1, weeks2) => {
     const weeks = (weeks1 !== null) ? weeks1 : weeks2 // ternary operator
+
+    let activityHead = document.querySelector('.activitiesHead');
+    let activityMain = document.querySelector('.activityListMainContainer');
+    if (activityHead.style.display == 'none' && activityMain.style.display == 'none') {
+        activityHead.removeAttribute('style');
+        activityMain.removeAttribute('style');
+    }
+
     let activityCA = document.querySelector('.activityCardAlign');
     activityCA.innerHTML = '';
 
