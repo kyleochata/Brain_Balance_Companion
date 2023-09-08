@@ -306,7 +306,7 @@ button:hover {
     position: absolute;
     text-align: left;
     position: absolute;
-    top: 125px;
+    top: 115px;
     left: 4vw;
     z-index: 2;
     font-size: clamp(14px, 2vw, 40px);
