@@ -130,7 +130,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.addEventListener("scroll", () => {
         if (lastScrollY < window.scrollY) {
-            console.log(lastScrollY)
             nav.addClass("headerTop--hidden");
             bottomNav.addClass("headerBottomAfter")
             bottomNav.removeAttr("id")

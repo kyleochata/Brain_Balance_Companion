@@ -276,6 +276,8 @@ button:hover {
     display: flex;
     align-content: center;
     justify-content: center;
+    text-align: center;
+    font-size: 20px;
 }
 
 #headerBottomRight {
@@ -337,7 +339,7 @@ button:hover {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 115px;
+    height: auto;
     margin-top: 30px;
     border-radius: 10px;
     flex: 0 0 auto;
@@ -648,10 +650,6 @@ button:hover {
         line-height: 1.25;
 
 
-    }
-
-    #heroShowHide{
-        
     }
 
     .resourcesLeftHeader{
