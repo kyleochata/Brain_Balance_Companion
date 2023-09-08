@@ -373,7 +373,7 @@ const observer = new MutationObserver(mutationsList => {
             renderData(masteractivityList, weeks, null);
             if (heroRemoved == false)
             {
-                document.getElementById('Activitydisplay').style.display = "block";
+                document.getElementById('Activitydisplay').style.display = "flex";
                 document.getElementById('heroShowHide').remove();
                 heroRemoved = true;
             }
