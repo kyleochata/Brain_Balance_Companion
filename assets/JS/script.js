@@ -360,7 +360,7 @@ document.querySelectorAll('.closeButton').forEach(function (button) {
 });
 
 
-
+document.getElementById('Activitydisplay').style.display = "none";
 let heroRemoved = false;
 const usernameModal = document.getElementById('username-modal');
 // Create a Mutation Observer
@@ -373,6 +373,7 @@ const observer = new MutationObserver(mutationsList => {
             renderData(masteractivityList, weeks, null);
             if (heroRemoved == false)
             {
+                document.getElementById('Activitydisplay').style.display = "block";
                 document.getElementById('heroShowHide').remove();
                 heroRemoved = true;
             }
