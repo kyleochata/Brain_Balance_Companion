@@ -385,7 +385,7 @@ button:hover {
 }
 
 .activityContent{
-    font-size: 10px;
+    font-size: clamp(12px, 1vw, 16px);
     margin: 0 0 8px 0;
     padding: 2px;
     height: 130px;
