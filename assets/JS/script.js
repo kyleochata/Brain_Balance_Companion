@@ -322,7 +322,6 @@ function closeModal($el) {
 // event listener for button that closes the modal for username Selection
 document.querySelectorAll('.closeButton').forEach(function (button) {
     button.addEventListener('click', function (event) {
-        console.log(event.target);
         const closestModal = event.target.closest('.modal');
         if (closestModal) {
             closeModal(closestModal);
@@ -372,7 +371,6 @@ function closeModal($el) {
 // event listener for button that closes the modal for username Selection
 document.querySelectorAll('.closeButton').forEach(function (button) {
     button.addEventListener('click', function (event) {
-        console.log(event.target);
         const closestModal = event.target.closest('.modal');
         if (closestModal) {
             closeModal(closestModal);
@@ -382,7 +380,7 @@ document.querySelectorAll('.closeButton').forEach(function (button) {
 
 
 
-
+let heroRemoved = false;
 const usernameModal = document.getElementById('username-modal');
 // Create a Mutation Observer
 const observer = new MutationObserver(mutationsList => {
@@ -392,6 +390,11 @@ const observer = new MutationObserver(mutationsList => {
             const targetElement = mutation.target;
             const weeks = update_usernames();
             renderData(masteractivityList, weeks, null);
+            if (heroRemoved == false)
+            {
+                document.getElementById('heroShowHide').remove();
+                heroRemoved = true;
+            }
         }
     }
 });
@@ -424,20 +427,16 @@ observer2.observe(weekModal, config2);
 //function that will call renderfirst card and rest of cards based on weeks gathered from week modal; figure out where to call renderData so that the object API will get passed and the week selected userinput gets passed.
 var renderData = (object, weeks1, weeks2) => {
     const weeks = (weeks1 !== null) ? weeks1 : weeks2 // ternary operator
-    // >= 10 then 10
-    // console.log("this is weeks" + weeks);
     let activityCA = document.querySelector('.activityCardAlign');
     activityCA.innerHTML = '';
 
     let weeksObject = []
 
-    console.log(object);
     for (let i = 0; i < object.length; i++) {
         if (object[i].weeks <= weeks) {
             weeksObject.push(object[i]);
         }
     }
-    // console.log(weeksObject);
     renderRestOfCards(weeksObject);
 
     const name = document.getElementById('usernameSelect').value;
@@ -504,7 +503,6 @@ function update_usernames() {
     let now = dayjs();
     let userDate;
     if (index !== -1) {
-        console.log(namesList[index]);
         userDate = dayjs(namesList[index].startDate);
     } else {
         alert("no user found");
