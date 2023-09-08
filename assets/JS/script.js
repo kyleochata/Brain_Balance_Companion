@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // Youtube API Fetch
-const apiKey = 'AIzaSyAvujvXXk3vxk-FOOQwnM8xz1F6Zem4Dz8';
+const apiKey = 'AIzaSyBOVNI7-8ipc-srfAywA9N5sQE7j07UQOM';
 const channelId = 'UC_1-oHAzKIzhKSl6O-RkozA';
 let nextPageToken = '';
 let currentPage = 1;
@@ -199,7 +199,7 @@ function fetchAndDisplayVideos(pageToken = '') {
     //Youtube video search
     function searchVideos() {
         const searchInput = document.getElementById('searchInput').value;
-        const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=15&pageToken=${nextPageToken}&q=${searchInput}`;
+        const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=12&pageToken=${nextPageToken}&q=${searchInput}`;
 
         fetch(apiUrl)
             .then((response) => response.json())
@@ -218,16 +218,14 @@ function fetchAndDisplayVideos(pageToken = '') {
 
         videos.forEach((video) => {
             const videoElement = document.createElement('div');
-            const h2El = document.createElement('h2');
-            h2El.innerHTML = video.snippet.title
             videoElement.classList.add('videoThumbnail')
             videoElement.classList.add('column')
             videoElement.classList.add('is-3');
             videoElement.innerHTML = `
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${video.id.videoId}" frameborder="0" allowfullscreen></iframe>
+                <iframe width=100% src="https://www.youtube.com/embed/${video.id.videoId}" frameborder="0" allowfullscreen></iframe>
+                <h2>${video.snippet.title}</h2>
             `;
             videoContainer.appendChild(videoElement);
-            videoElement.appendChild(h2El);
         });
 
         updatePageInfo();

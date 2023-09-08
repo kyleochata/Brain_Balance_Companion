@@ -32,7 +32,6 @@
 
 
     </section>
-
     <section id="headerBottom" class="columns">
       <div class="column is-one-third"><img src="./assets/imgs/BBLogo.png" alt="Brain Balance Logo" id=headerLogo></div>
       <div id="titleUserInfo" class="headerBottomMiddle column">User: xxx Week: yyy</div>
@@ -46,22 +45,39 @@
       </div>
 
     </section>
-  </header>
 
-  <main>
-    <section id="activitiesList">
-      <div class="activitiesHead">
-        <h2 class="weekTitle1">Activities for</h2>
-        <h2 class="weekTitle2">Week 1</h2>
-      </div>
-      <!-- possible Ul to Li dynamic generate -->
-      <div class="activityListMainContainer">
 
-        <div class="activityListContainer">
-          <div class="activityCardAlign columns">
 
-            <!-- all dynamically generated cards should have a class of column -->
-            <!-- <div class="card activityCard column is-one-fifths">
+    <main>
+
+
+      <section id="activitiesList">
+        <div id="heroShowHide">
+          <div class="heroTextContainer">
+            <!-- Add text here -->
+            <h1 id="heroText">Welcome!
+              <br><br>
+              Use the buttons on the top right to pick a week or choose your username.
+              <br><br>
+              A list of activities to complete each day will appear!
+            </h1>
+
+          </div>
+
+          <img src="./assets/imgs/hero.png" id="heroImage">
+        </div>
+        <div class="activitiesHead">
+          <h2 class="weekTitle1">Activities for</h2>
+          <h2 class="weekTitle2">Week 1</h2>
+        </div>
+        <!-- possible Ul to Li dynamic generate -->
+        <div class="activityListMainContainer">
+
+          <div class="activityListContainer">
+            <div class="activityCardAlign columns">
+
+              <!-- all dynamically generated cards should have a class of column -->
+              <!-- <div class="card activityCard column is-one-fifths">
               <div class="card-header activityCardHeader columns">
                 Superman
               </div>
@@ -159,116 +175,118 @@
                 </button>
               </div>
             </div> -->
-          </div>
-        </div>
-      </div>
-
-      <hr class="divider">
-
-      <section id="resourcesContainer">
-        <h2 class="resourcesTitle">Resources</h2>
-        <div class="columns" id="resourcesContent">
-          <div class="column resourcesLeft">
-            <h2 class="resourcesLeftHeader">Program Links</h2>
-            <hr class="dividerResourcesLeft">
-            <ul class="resourcesList">
-              <li class="resourcesLi"><a
-                  href="https://www.brainbalancecenters.com/blog/how-does-the-brain-balance-program-work"
-                  target="_blank" class="resourcesListLinks">How It Works</a></li>
-              <li class="resourcesLi"><a href="https://www.brainbalancecenters.com/our-program" target="_blank"
-                  class="resourcesListLinks">Program Overview</a></li>
-              <li class="resourcesLi"><a href="https://www.brainbalancecenters.com/our-program/childs-personalized-plan"
-                  target="_blank" class="resourcesListLinks">Personalized Plan</a></li>
-              <li class="resourcesLi"><a
-                  href="https://www.brainbalancecenters.com/brain-balance-program-research-and-results" target="_blank"
-                  class="resourcesListLinks">Research</a></li>
-              <li class="resourcesLi"><a href="https://www.brainbalancecenters.com/brain-balance-virtual-program"
-                  target="_blank" class="resourcesListLinks">Virtual Program</a></li>
-              <li class="resourcesLi"><a href="https://www.brainbalancecenters.com/online-assessment" target="_blank"
-                  class="resourcesListLinks">Online Quiz</a></li>
-            </ul>
-          </div>
-          <div class="column is-four-fifths resourcesRight">
-            <h1>YouTube Video Search</h1>
-            <input type="text" id="searchInput" placeholder="Enter keywords...">
-            <button onclick="searchVideos()">Search</button>
-
-            <div id="videoGrid" class = "columns"></div>
-
-            <div id="videoContainer" class = "columns"></div>
-
-            <div id="pagination">
-              <button onclick="previousPage()">Previous</button>
-              <span id="pageInfo">Page 1</span>
-              <button onclick="nextPage()">Next</button>
             </div>
-
           </div>
         </div>
+
+        <hr class="divider">
+
+        <section id="resourcesContainer">
+          <h2 class="resourcesTitle">Resources</h2>
+          <div class="columns" id="resourcesContent">
+            <div class="column resourcesLeft is-2">
+              <div style="height:75px;"></div>
+              <h2 class="resourcesLeftHeader">Program Links</h2>
+              <hr class="dividerResourcesLeft">
+              <ul class="resourcesList">
+                <li class="resourcesLi"><a
+                    href="https://www.brainbalancecenters.com/blog/how-does-the-brain-balance-program-work"
+                    target="_blank" class="resourcesListLinks">How It Works</a></li>
+                <li class="resourcesLi"><a href="https://www.brainbalancecenters.com/our-program" target="_blank"
+                    class="resourcesListLinks">Program Overview</a></li>
+                <li class="resourcesLi"><a
+                    href="https://www.brainbalancecenters.com/our-program/childs-personalized-plan" target="_blank"
+                    class="resourcesListLinks">Personalized Plan</a></li>
+                <li class="resourcesLi"><a
+                    href="https://www.brainbalancecenters.com/brain-balance-program-research-and-results"
+                    target="_blank" class="resourcesListLinks">Research</a></li>
+                <li class="resourcesLi"><a href="https://www.brainbalancecenters.com/brain-balance-virtual-program"
+                    target="_blank" class="resourcesListLinks">Virtual Program</a></li>
+                <li class="resourcesLi"><a href="https://www.brainbalancecenters.com/online-assessment" target="_blank"
+                    class="resourcesListLinks">Online Quiz</a></li>
+              </ul>
+            </div>
+            <div class="column is-10 resourcesRight">
+              <h1 id="youtubeHeader">Search Our Youtube Channel</h1>
+              <hr class="dividerYoutube">
+              <div id="searchAlign">
+                <input class="youtubeSearch" type="text" id="searchInput" placeholder="Enter keywords...">
+                <button id="youtubeSearchButton" onclick="searchVideos()">Search</button>
+              </div>
+              <div id="videoContainer" class="columns"></div>
+
+              <div id="pagination">
+                <button onclick="previousPage()">Previous</button>
+                <span id="pageInfo">Page 1</span>
+                <button onclick="nextPage()">Next</button>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
 
       </section>
 
-    </section>
 
+    </main>
 
-  </main>
-
-  <footer id="footerMain">
-    <div id="footerInvert"></div>
-    <div class="footerContents">
-      <h3>Made by Adrian C, Steve M, and Kyle E.</h3>
-      <a id="footerLink">link to code</a>
-    </div>
-
-  </footer>
-
-  <!-- username modal -->
-  <div id="username-modal" class="modal">
-    <div class="modal-background"></div>
-
-    <div class="modal-content">
-      <div class="box">
-        <div class="labelContainer">
-          <label>Please Select a UserName:</label>
-        </div>
-
-        <div class="select">
-          <select id="usernameSelect"></select>
-        </div>
-        <button class="closeButton" id="closeSelectButton">OK</button>
+    <footer id="footerMain">
+      <div id="footerInvert"></div>
+      <div class="footerContents">
+        <h3>Made by Adrian C, Steve M, and Kyle E.</h3>
+        <a id="footerLink">link to code</a>
       </div>
-    </div>
 
-    <button class="modal-close is-large" aria-label="close"></button>
-  </div>
+    </footer>
 
-  <!-- week select modal -->
-  <div id="week-modal" class="modal">
-    <div class="modal-background"></div>
+    <!-- username modal -->
+    <div id="username-modal" class="modal">
+      <div class="modal-background"></div>
 
-    <div class="modal-content">
-      <div class="box">
-        <div class="labelContainer">
-          <label>Please Select a Week:</label>
+      <div class="modal-content">
+        <div class="box">
+          <div class="labelContainer">
+            <label>Please Select a UserName:</label>
+          </div>
+
+          <div class="select">
+            <select id="usernameSelect"></select>
+          </div>
+          <button class="closeButton" id="closeSelectButton">OK</button>
         </div>
-
-        <div class="select">
-          <select id="week">
-          </select>
-        </div>
-        <button class="closeButton">OK</button>
       </div>
+
+      <button class="modal-close is-large" aria-label="close"></button>
     </div>
 
-    <button class="modal-close is-large" aria-label="close"></button>
-  </div>
+    <!-- week select modal -->
+    <div id="week-modal" class="modal">
+      <div class="modal-background"></div>
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <div class="modal-content">
+        <div class="box">
+          <div class="labelContainer">
+            <label>Please Select a Week:</label>
+          </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
-  <script src="./assets/JS/script.js"></script>
+          <div class="select">
+            <select id="week">
+            </select>
+          </div>
+          <button class="closeButton">OK</button>
+        </div>
+      </div>
+
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+    <script src="./assets/JS/script.js"></script>
 
 </body>
 
