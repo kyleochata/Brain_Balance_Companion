@@ -12,7 +12,7 @@ Page Wire-frame:
 Card Wire-frame:
 ![card-wireframe](./assets/imgs/card-wireframe.png)
 
-Our deployed application can be found [here](https://kyleochata.github.io/Project-1-SAK/). Below are screenshots of the deployed application. We were able to execute from our initial idea and wire-frame and create a site that satisfies our internal acceptance criteria of making the Brain Balance service more interactable and user-friendly than a google sheet with information. A challenge we faced was taking the initial idea and trying to find all the moving pieces to make it a reality.  Another challenge we experienced during this project was working as a part of a team on GitHub. Having to work through the merging and resolving of conflicts took some getting used. 
+Our deployed application can be found [here]([https://kyleochata.github.io/Project-1-SAK/](https://kyleochata.github.io/Brain_Balance_Companion/)). Below are screenshots of the deployed application. We were able to execute from our initial idea and wire-frame and create a site that satisfies our internal acceptance criteria of making the Brain Balance service more interactable and user-friendly than a google sheet with information. A challenge we faced was taking the initial idea and trying to find all the moving pieces to make it a reality.  Another challenge we experienced during this project was working as a part of a team on GitHub. Having to work through the merging and resolving of conflicts took some getting used. 
 
 Deployed Application on load:
 ![deployed app-screenshot](./assets/imgs/deployed-app-on-load.png)
